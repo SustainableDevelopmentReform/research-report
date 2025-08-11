@@ -3,7 +3,7 @@ import MarkdownItFootnote from "markdown-it-footnote";
 
 export default {
   // The app's title; used in the sidebar and webpage titles.
-  title: "Observable Framework Project",
+  title: "Research Report Publishing Platform",
   
   // Configure markdown-it plugins
   markdownIt: (md) => md.use(MarkdownItFootnote),
@@ -13,7 +13,22 @@ export default {
   // lets you organize them into sections and have unlisted pages.
   pages: [
     {name: "Home", path: "/"},
-    // Add more pages here as needed
+    {
+      name: "Data Visualization",
+      pages: [
+        {name: "Statistical Analysis", path: "/statistical-analysis"},
+        {name: "Time Series", path: "/time-series"},
+        {name: "Geospatial Data", path: "/geospatial"},
+        {name: "Network Analysis", path: "/network-analysis"},
+      ]
+    },
+    {
+      name: "Reports & Tables",
+      pages: [
+        {name: "Data Tables", path: "/data-tables"},
+        {name: "Methods & References", path: "/methods"},
+      ]
+    }
   ],
 
   // Content to add to the head of the page, e.g. for a favicon:
