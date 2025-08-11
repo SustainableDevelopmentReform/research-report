@@ -17,7 +17,7 @@
 <link rel="modulepreload" href="./_observablehq/stdlib.24b62b2e.js">
 <link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.17/d761ef9b.js">
 <link rel="modulepreload" href="./_npm/d3@7.9.0/e780feca.js">
-<link rel="modulepreload" href="./_import/components/timeline.a41f0a1d.js">
+<link rel="modulepreload" href="./_import/components/timeline.34c21919.js">
 <link rel="modulepreload" href="./_observablehq/stdlib/inputs.b5a86791.js">
 <link rel="modulepreload" href="./_npm/htl@0.3.1/72f4716c.js">
 <link rel="modulepreload" href="./_npm/isoformat@0.2.1/18cbf477.js">
@@ -63,7 +63,7 @@
 import {define} from "./_observablehq/client.5446bbef.js";
 
 define({id: "55826645", outputs: ["Plot","d3","Timeline"], body: async () => {
-const [Plot, d3, {Timeline}] = await Promise.all([import("./_npm/@observablehq/plot@0.6.17/d761ef9b.js"), import("./_npm/d3@7.9.0/e780feca.js"), import("./_import/components/timeline.a41f0a1d.js")]);
+const [Plot, d3, {Timeline}] = await Promise.all([import("./_npm/@observablehq/plot@0.6.17/d761ef9b.js"), import("./_npm/d3@7.9.0/e780feca.js"), import("./_import/components/timeline.34c21919.js")]);
 
 return {Plot,d3,Timeline};
 }});
@@ -402,7 +402,7 @@ Timeline(milestones, {
 ))
 }});
 
-define({id: "0b3579df", inputs: ["d3","monthlyData"], outputs: ["calculateACF","temperatureValues","acfData"], body: (d3,monthlyData) => {
+define({id: "69127861", inputs: ["d3"], outputs: ["calculateACF"], body: (d3) => {
 // Calculate autocorrelation function
 function calculateACF(data, maxLag = 20) {
   const mean = d3.mean(data);
@@ -430,13 +430,13 @@ function calculateACF(data, maxLag = 20) {
   });
 }
 
-const temperatureValues = monthlyData.map(d => d.temperature);
-const acfData = calculateACF(temperatureValues, 36);
-return {calculateACF,temperatureValues,acfData};
+return {calculateACF};
 }});
 
-define({id: "801dece0", inputs: ["Plot","acfData","display"], body: async (Plot,acfData,display) => {
-display(await(
+define({id: "1b05ab43", inputs: ["monthlyData","calculateACF","Plot"], outputs: ["temperatureValues","acfData"], body: (monthlyData,calculateACF,Plot) => {
+const temperatureValues = monthlyData.map(d => d.temperature);
+const acfData = calculateACF(temperatureValues, 36);
+
 Plot.plot({
   title: "Autocorrelation Function (ACF)",
   subtitle: "Testing for serial correlation in temperature data",
@@ -463,7 +463,7 @@ Plot.plot({
     })
   ]
 })
-))
+return {temperatureValues,acfData};
 }});
 
 define({id: "e02cef44", inputs: ["monthlyData","d3"], outputs: ["rollingWindow","volatilityData"], body: (monthlyData,d3) => {
@@ -687,8 +687,8 @@ Inputs.table(statsTable, {
 <h2 id="autocorrelation-analysis" tabindex="-1"><a class="observablehq-header-anchor" href="#autocorrelation-analysis">Autocorrelation Analysis</a></h2>
 <h3 id="acf-and-pacf-plots" tabindex="-1"><a class="observablehq-header-anchor" href="#acf-and-pacf-plots">ACF and PACF Plots</a></h3>
 <p>Autocorrelation helps identify patterns and dependencies in time series data<sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup>.</p>
-<div class="observablehq observablehq--block"><!--:0b3579df:--></div>
-<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:801dece0:--></div>
+<div class="observablehq observablehq--block"><!--:69127861:--></div>
+<div class="observablehq observablehq--block"><!--:1b05ab43:--></div>
 <h2 id="volatility-analysis" tabindex="-1"><a class="observablehq-header-anchor" href="#volatility-analysis">Volatility Analysis</a></h2>
 <h3 id="rolling-standard-deviation" tabindex="-1"><a class="observablehq-header-anchor" href="#rolling-standard-deviation">Rolling Standard Deviation</a></h3>
 <div class="observablehq observablehq--block"><!--:e02cef44:--></div>

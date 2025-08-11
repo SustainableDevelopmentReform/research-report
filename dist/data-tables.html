@@ -176,12 +176,14 @@ const getTableData = () => {
 return {getTableData};
 }});
 
-define({id: "f8b5aa31", inputs: ["Inputs","getTableData","view"], body: (Inputs,getTableData,view) => {
+define({id: "7016dbf2", inputs: ["Inputs","getTableData","viewOption","display"], body: async (Inputs,getTableData,viewOption,display) => {
+display(await(
 Inputs.table(getTableData(), {
-  sort: view === "Summary" ? "Group" : "ID",
+  sort: viewOption === "Summary" ? "Group" : "ID",
   reverse: false,
   layout: "auto"
 })
+))
 }});
 
 define({id: "11d5dee0", inputs: ["d3","enrichedData"], outputs: ["generateStats","statsReport"], body: (d3,enrichedData) => {
@@ -352,7 +354,7 @@ Inputs.table(missingTableData, {
 <h2 id="interactive-data-table" tabindex="-1"><a class="observablehq-header-anchor" href="#interactive-data-table">Interactive Data Table</a></h2>
 <div class="observablehq observablehq--block"><!--:9f2a84dc:--></div>
 <div class="observablehq observablehq--block"><!--:6d2befd2:--></div>
-<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:f8b5aa31:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:7016dbf2:--></div>
 <h2 id="statistical-summary-report" tabindex="-1"><a class="observablehq-header-anchor" href="#statistical-summary-report">Statistical Summary Report</a></h2>
 <div class="observablehq observablehq--block"><!--:11d5dee0:--></div>
 <h3 id="table-1-statistical-summary-of-treatment-effects" tabindex="-1"><a class="observablehq-header-anchor" href="#table-1-statistical-summary-of-treatment-effects">Table 1: Statistical Summary of Treatment Effects<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></a></h3>

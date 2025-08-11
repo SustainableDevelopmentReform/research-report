@@ -119,7 +119,7 @@ const getTableData = () => {
 
 ```js
 Inputs.table(getTableData(), {
-  sort: view === "Summary" ? "Group" : "ID",
+  sort: viewOption === "Summary" ? "Group" : "ID",
   reverse: false,
   layout: "auto"
 })

@@ -1,7 +1,7 @@
 import * as d3 from "npm:d3";
 import {sankey, sankeyLinkHorizontal} from "npm:d3-sankey";
 
-export function createSankeyDiagram(data, {
+export function SankeyDiagram(data, {
   width = 928,  // Standard Observable Framework width
   height = 750,  // More height for better spacing
   nodeWidth = 120,  // Width for outer nodes

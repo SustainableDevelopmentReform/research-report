@@ -381,11 +381,12 @@ function calculateACF(data, maxLag = 20) {
   });
 }
 
-const temperatureValues = monthlyData.map(d => d.temperature);
-const acfData = calculateACF(temperatureValues, 36);
 ```
 
 ```js
+const temperatureValues = monthlyData.map(d => d.temperature);
+const acfData = calculateACF(temperatureValues, 36);
+
 Plot.plot({
   title: "Autocorrelation Function (ACF)",
   subtitle: "Testing for serial correlation in temperature data",
