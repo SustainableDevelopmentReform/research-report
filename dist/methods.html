@@ -56,6 +56,7 @@
 <link rel="modulepreload" href="./_npm/delaunator@5.0.1/02d43215.js">
 <link rel="modulepreload" href="./_npm/robust-predicates@3.0.2/aa00730b.js">
 <link rel="icon" href="./_file/observable.1af93621.png" type="image/png" sizes="32x32">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.22/dist/katex.min.css" integrity="sha384-uj2P2BRlhRHt0cojKSRVqpbGN6F39TGsI+AX8CuaUtL6v6ldH8TZvVoNVVV6b3W4" crossorigin="anonymous">
 <script type="module">
 
 import {define} from "./_observablehq/client.5446bbef.js";
@@ -66,7 +67,7 @@ const [Plot, d3] = await Promise.all([import("./_npm/@observablehq/plot@0.6.17/d
 return {Plot,d3};
 }});
 
-define({id: "2d1e74bd", inputs: ["Plot","display"], outputs: ["dataCollection","collectionChart"], body: (Plot,display) => {
+define({id: "12330b28", inputs: ["Plot"], outputs: ["dataCollection","collectionChart"], body: (Plot) => {
 // Data collection parameters
 const dataCollection = {
   "Primary Sources": {
@@ -109,11 +110,11 @@ const collectionChart = Plot.plot({
   ]
 });
 
-display(collectionChart);
+collectionChart
 return {dataCollection,collectionChart};
 }});
 
-define({id: "84039b49", inputs: ["d3","Plot","display"], outputs: ["samplingData","samplingPlot"], body: (d3,Plot,display) => {
+define({id: "4d640238", inputs: ["d3","Plot"], outputs: ["samplingData","samplingPlot"], body: (d3,Plot) => {
 const samplingData = d3.range(100).map(i => ({
   stratum: ["Urban", "Suburban", "Rural"][Math.floor(i / 33.33)],
   age: 18 + Math.random() * 62,
@@ -136,11 +137,11 @@ const samplingPlot = Plot.plot({
   ]
 });
 
-display(samplingPlot);
+samplingPlot
 return {samplingData,samplingPlot};
 }});
 
-define({id: "d9afb006", inputs: ["display","html"], outputs: ["pipeline"], body: (display,html) => {
+define({id: "5773d304", inputs: ["html"], outputs: ["pipeline"], body: (html) => {
 const pipeline = `
 graph LR
     A[Raw Data] --> B[Data Cleaning]
@@ -157,14 +158,14 @@ graph LR
     I --> E
 `;
 
-display(html`<div class="pipeline-diagram">
+html`<div class="pipeline-diagram">
   <pre>${pipeline}</pre>
   <p><em>Figure: Data processing pipeline showing transformation stages</em></p>
-</div>`);
+</div>`
 return {pipeline};
 }});
 
-define({id: "cdcb07a3", inputs: ["d3","Plot","display"], outputs: ["regressionData","xMean","yMean","slope","intercept","regressionPlot"], body: (d3,Plot,display) => {
+define({id: "a651d14f", inputs: ["d3","Plot"], outputs: ["regressionData","xMean","yMean","slope","intercept","regressionPlot"], body: (d3,Plot) => {
 // Generate sample regression data
 const regressionData = d3.range(50).map(i => {
   const x = i * 2;
@@ -196,11 +197,11 @@ const regressionPlot = Plot.plot({
   ]
 });
 
-display(regressionPlot);
+regressionPlot
 return {regressionData,xMean,yMean,slope,intercept,regressionPlot};
 }});
 
-define({id: "d73e2625", inputs: ["d3","Plot","display"], outputs: ["cvFolds","cvResults","cvPlot"], body: (d3,Plot,display) => {
+define({id: "3b43928a", inputs: ["d3","Plot"], outputs: ["cvFolds","cvResults","cvPlot"], body: (d3,Plot) => {
 const cvFolds = 5;
 const cvResults = d3.range(cvFolds).map(i => ({
   fold: `Fold ${i + 1}`,
@@ -229,11 +230,11 @@ const cvPlot = Plot.plot({
   ]
 });
 
-display(cvPlot);
+cvPlot
 return {cvFolds,cvResults,cvPlot};
 }});
 
-define({id: "edf2ccef", inputs: ["display","Inputs"], outputs: ["ethicsChecklist"], body: (display,Inputs) => {
+define({id: "01fb8898", inputs: ["Inputs"], outputs: ["ethicsChecklist"], body: (Inputs) => {
 const ethicsChecklist = [
   {category: "Informed Consent", status: "✓", notes: "All participants provided written consent"},
   {category: "Data Privacy", status: "✓", notes: "Personal identifiers removed, data encrypted"},
@@ -242,18 +243,18 @@ const ethicsChecklist = [
   {category: "Data Retention", status: "✓", notes: "7-year retention policy in secure storage"}
 ];
 
-display(Inputs.table(ethicsChecklist, {
+Inputs.table(ethicsChecklist, {
   columns: ["category", "status", "notes"],
   header: {
     category: "Ethical Requirement",
     status: "Status",
     notes: "Implementation Notes"
   }
-}));
+})
 return {ethicsChecklist};
 }});
 
-define({id: "439e8b8e", inputs: ["html","display"], outputs: ["limitations"], body: (html,display) => {
+define({id: "d0495e27", inputs: ["html"], outputs: ["limitations"], body: (html) => {
 const limitations = html`
 <div class="card">
   <h3>Study Limitations</h3>
@@ -266,11 +267,11 @@ const limitations = html`
   </ul>
 </div>`;
 
-display(limitations);
+limitations
 return {limitations};
 }});
 
-define({id: "47e5be3d", inputs: ["html","display"], outputs: ["reproducibility"], body: (html,display) => {
+define({id: "3d1f7404", inputs: ["html"], outputs: ["reproducibility"], body: (html) => {
 const reproducibility = html`
 <div class="info-box">
   <h3>📊 Reproducible Research</h3>
@@ -283,7 +284,7 @@ const reproducibility = html`
   </ul>
 </div>`;
 
-display(reproducibility);
+reproducibility
 return {reproducibility};
 }});
 
@@ -340,27 +341,27 @@ return {reproducibility};
 <div class="observablehq observablehq--block"><!--:7c75f0ab:--></div>
 <h2 id="data-collection-framework" tabindex="-1"><a class="observablehq-header-anchor" href="#data-collection-framework">Data Collection Framework</a></h2>
 <p>Our research employs a multi-source data collection strategy:</p>
-<div class="observablehq observablehq--block"><!--:2d1e74bd:--></div>
+<div class="observablehq observablehq--block"><!--:12330b28:--></div>
 <h2 id="sampling-methodology" tabindex="-1"><a class="observablehq-header-anchor" href="#sampling-methodology">Sampling Methodology</a></h2>
 <h3 id="stratified-random-sampling" tabindex="-1"><a class="observablehq-header-anchor" href="#stratified-random-sampling">Stratified Random Sampling</a></h3>
 <p>We employed stratified random sampling to ensure representative coverage across key demographic variables:</p>
-<div class="observablehq observablehq--block"><!--:84039b49:--></div>
+<div class="observablehq observablehq--block"><!--:4d640238:--></div>
 <h2 id="data-processing-pipeline" tabindex="-1"><a class="observablehq-header-anchor" href="#data-processing-pipeline">Data Processing Pipeline</a></h2>
-<div class="observablehq observablehq--block"><!--:d9afb006:--></div>
+<div class="observablehq observablehq--block"><!--:5773d304:--></div>
 <h2 id="statistical-methods" tabindex="-1"><a class="observablehq-header-anchor" href="#statistical-methods">Statistical Methods</a></h2>
 <h3 id="regression-analysis" tabindex="-1"><a class="observablehq-header-anchor" href="#regression-analysis">Regression Analysis</a></h3>
-<div class="observablehq observablehq--block"><!--:cdcb07a3:--></div>
+<div class="observablehq observablehq--block"><!--:a651d14f:--></div>
 <h2 id="validation-techniques" tabindex="-1"><a class="observablehq-header-anchor" href="#validation-techniques">Validation Techniques</a></h2>
 <h3 id="cross-validation-results" tabindex="-1"><a class="observablehq-header-anchor" href="#cross-validation-results">Cross-Validation Results</a></h3>
-<div class="observablehq observablehq--block"><!--:d73e2625:--></div>
+<div class="observablehq observablehq--block"><!--:3b43928a:--></div>
 <h2 id="ethical-considerations" tabindex="-1"><a class="observablehq-header-anchor" href="#ethical-considerations">Ethical Considerations</a></h2>
 <p>Our research adheres to strict ethical guidelines:</p>
-<div class="observablehq observablehq--block"><!--:edf2ccef:--></div>
+<div class="observablehq observablehq--block"><!--:01fb8898:--></div>
 <h2 id="limitations" tabindex="-1"><a class="observablehq-header-anchor" href="#limitations">Limitations</a></h2>
-<div class="observablehq observablehq--block"><!--:439e8b8e:--></div>
+<div class="observablehq observablehq--block"><!--:d0495e27:--></div>
 <h2 id="reproducibility" tabindex="-1"><a class="observablehq-header-anchor" href="#reproducibility">Reproducibility</a></h2>
 <p>All analysis code and anonymized datasets are available in our GitHub repository:</p>
-<div class="observablehq observablehq--block"><!--:47e5be3d:--></div>
+<div class="observablehq observablehq--block"><!--:3d1f7404:--></div>
 <hr>
 <style>
 .card {

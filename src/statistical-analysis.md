@@ -189,6 +189,13 @@ Visualizing the results of statistical tests helps communicate significance[^5].
 const group1 = d3.range(50).map(() => d3.randomNormal(100, 15)());
 const group2 = d3.range(50).map(() => d3.randomNormal(108, 15)());
 
+// Approximate p-value calculation (simplified)
+function jStat_studentt_cdf(t, df) {
+  // Simplified approximation for demonstration
+  return 0.5 + 0.5 * (t / Math.sqrt(t * t + df));
+}
+const jStat = {studentt: {cdf: jStat_studentt_cdf}};
+
 // Calculate t-statistic
 const mean1 = d3.mean(group1);
 const mean2 = d3.mean(group2);
@@ -210,13 +217,6 @@ const testResult = {
   "p-value": pValue < 0.001 ? "< 0.001" : pValue.toFixed(4),
   "Significant": pValue < 0.05 ? "Yes" : "No"
 };
-
-// Approximate p-value calculation (simplified)
-function jStat_studentt_cdf(t, df) {
-  // Simplified approximation for demonstration
-  return 0.5 + 0.5 * (t / Math.sqrt(t * t + df));
-}
-const jStat = {studentt: {cdf: jStat_studentt_cdf}};
 ```
 
 ```js

@@ -54,7 +54,7 @@ const collectionChart = Plot.plot({
   ]
 });
 
-display(collectionChart);
+collectionChart
 ```
 
 ## Sampling Methodology
@@ -86,7 +86,7 @@ const samplingPlot = Plot.plot({
   ]
 });
 
-display(samplingPlot);
+samplingPlot
 ```
 
 ## Data Processing Pipeline
@@ -108,10 +108,10 @@ graph LR
     I --> E
 `;
 
-display(html`<div class="pipeline-diagram">
+html`<div class="pipeline-diagram">
   <pre>${pipeline}</pre>
   <p><em>Figure: Data processing pipeline showing transformation stages</em></p>
-</div>`);
+</div>`
 ```
 
 ## Statistical Methods
@@ -150,7 +150,7 @@ const regressionPlot = Plot.plot({
   ]
 });
 
-display(regressionPlot);
+regressionPlot
 ```
 
 ## Validation Techniques
@@ -186,7 +186,7 @@ const cvPlot = Plot.plot({
   ]
 });
 
-display(cvPlot);
+cvPlot
 ```
 
 ## Ethical Considerations
@@ -202,14 +202,14 @@ const ethicsChecklist = [
   {category: "Data Retention", status: "✓", notes: "7-year retention policy in secure storage"}
 ];
 
-display(Inputs.table(ethicsChecklist, {
+Inputs.table(ethicsChecklist, {
   columns: ["category", "status", "notes"],
   header: {
     category: "Ethical Requirement",
     status: "Status",
     notes: "Implementation Notes"
   }
-}));
+})
 ```
 
 ## Limitations
@@ -227,7 +227,7 @@ const limitations = html`
   </ul>
 </div>`;
 
-display(limitations);
+limitations
 ```
 
 ## Reproducibility
@@ -247,7 +247,7 @@ const reproducibility = html`
   </ul>
 </div>`;
 
-display(reproducibility);
+reproducibility
 ```
 
 ---

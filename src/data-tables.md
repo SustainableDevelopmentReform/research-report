@@ -35,18 +35,15 @@ const enrichedData = researchData.map(d => ({
 ## Interactive Data Table
 
 ```js
-const viewInput = Inputs.select(["Summary", "Full Dataset", "By Group", "By Site"], {
+const viewOption = view(Inputs.select(["Summary", "Full Dataset", "By Group", "By Site"], {
   value: "Summary",
   label: "View"
-});
-const view = Generators.input(viewInput);
+}));
 ```
-
-${viewInput}
 
 ```js
 const getTableData = () => {
-  if (view === "Summary") {
+  if (viewOption === "Summary") {
     const summary = d3.rollup(
       enrichedData,
       v => ({
@@ -71,7 +68,7 @@ const getTableData = () => {
       "Mean Change": stats.meanChange.toFixed(2),
       "Completion Rate": `${(stats.completed / stats.n * 100).toFixed(1)}%`
     }));
-  } else if (view === "By Site") {
+  } else if (viewOption === "By Site") {
     const bySite = d3.rollup(
       enrichedData,
       v => ({
@@ -91,7 +88,7 @@ const getTableData = () => {
       "Mean Age": stats.meanAge.toFixed(1),
       "Mean Change": stats.meanChange.toFixed(2)
     }));
-  } else if (view === "By Group") {
+  } else if (viewOption === "By Group") {
     return enrichedData.filter(d => d.completed).map(d => ({
       ID: d.id,
       Group: d.group,
