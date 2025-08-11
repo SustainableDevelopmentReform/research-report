@@ -4,17 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="generator" content="Observable Framework v1.13.3">
-<title>Welcome to Observable Framework | Observable Framework Project</title>
+<title>Research Report Publishing Platform</title>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
 <link rel="preload" as="style" href="./_observablehq/theme-air,near-midnight.dcdbf18e.css">
+<link rel="preload" as="style" href="./_observablehq/stdlib/inputs.ea9fd553.css">
 <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
 <link rel="stylesheet" type="text/css" href="./_observablehq/theme-air,near-midnight.dcdbf18e.css">
-<link rel="modulepreload" href="./_observablehq/client.0f853e96.js">
+<link rel="stylesheet" type="text/css" href="./_observablehq/stdlib/inputs.ea9fd553.css">
+<link rel="modulepreload" href="./_observablehq/client.5446bbef.js">
 <link rel="modulepreload" href="./_observablehq/runtime.e080113b.js">
 <link rel="modulepreload" href="./_observablehq/stdlib.24b62b2e.js">
 <link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.17/d761ef9b.js">
 <link rel="modulepreload" href="./_npm/d3@7.9.0/e780feca.js">
+<link rel="modulepreload" href="./_observablehq/stdlib/inputs.b5a86791.js">
+<link rel="modulepreload" href="./_npm/htl@0.3.1/72f4716c.js">
 <link rel="modulepreload" href="./_npm/isoformat@0.2.1/18cbf477.js">
 <link rel="modulepreload" href="./_npm/interval-tree-1d@1.0.4/53fe8176.js">
 <link rel="modulepreload" href="./_npm/d3-array@3.2.4/e93ca09f.js">
@@ -54,7 +58,7 @@
 <link rel="icon" href="./_file/observable.1af93621.png" type="image/png" sizes="32x32">
 <script type="module">
 
-import {define} from "./_observablehq/client.0f853e96.js";
+import {define} from "./_observablehq/client.5446bbef.js";
 
 define({id: "7c75f0ab", outputs: ["Plot","d3"], body: async () => {
 const [Plot, d3] = await Promise.all([import("./_npm/@observablehq/plot@0.6.17/d761ef9b.js"), import("./_npm/d3@7.9.0/e780feca.js")]);
@@ -62,25 +66,210 @@ const [Plot, d3] = await Promise.all([import("./_npm/@observablehq/plot@0.6.17/d
 return {Plot,d3};
 }});
 
-define({id: "4ed6a314", inputs: ["d3"], outputs: ["data"], body: (d3) => {
-// Generate some sample data
-const data = d3.range(100).map(i => ({
-  x: i,
-  y: Math.sin(i / 10) * 20 + Math.random() * 10
+define({id: "ce7d251c", inputs: ["d3"], outputs: ["metrics","monthlyData"], body: (d3) => {
+// Generate sample metrics for dashboard
+const metrics = {
+  papers: 1247,
+  citations: 8934,
+  hIndex: 42,
+  collaborators: 186
+};
+
+const monthlyData = d3.range(12).map(i => ({
+  month: d3.timeFormat("%b")(new Date(2024, i)),
+  publications: Math.floor(Math.random() * 20) + 80,
+  citations: Math.floor(Math.random() * 500) + 700
 }));
-return {data};
+return {metrics,monthlyData};
 }});
 
-define({id: "c97d508a", inputs: ["Plot","data","display"], body: async (Plot,data,display) => {
+define({id: "c9a9009c", mode: "inline", inputs: ["metrics","display"], body: async (metrics,display) => {
 display(await(
-// Create a line chart
+metrics.papers.toLocaleString()
+))
+}});
+
+define({id: "fc1f0b61", mode: "inline", inputs: ["metrics","display"], body: async (metrics,display) => {
+display(await(
+metrics.citations.toLocaleString()
+))
+}});
+
+define({id: "eb03b392", mode: "inline", inputs: ["metrics","display"], body: async (metrics,display) => {
+display(await(
+metrics.hIndex
+))
+}});
+
+define({id: "2baf2137", mode: "inline", inputs: ["metrics","display"], body: async (metrics,display) => {
+display(await(
+metrics.collaborators
+))
+}});
+
+define({id: "86d257a5", inputs: ["Plot","monthlyData","display"], body: async (Plot,monthlyData,display) => {
+display(await(
 Plot.plot({
+  title: "Monthly Research Metrics (2024)",
+  subtitle: "Publications and citations by month",
+  marginLeft: 60,
+  height: 300,
+  y: {grid: true},
   marks: [
-    Plot.line(data, {x: "x", y: "y", stroke: "steelblue"}),
-    Plot.dot(data, {x: "x", y: "y", fill: "steelblue"})
-  ],
-  grid: true,
-  height: 400
+    Plot.barY(monthlyData, {
+      x: "month",
+      y: "publications",
+      fill: "steelblue",
+      tip: true
+    }),
+    Plot.lineY(monthlyData, {
+      x: "month", 
+      y: "citations",
+      stroke: "orange",
+      strokeWidth: 2,
+      marker: true
+    }),
+    Plot.text(monthlyData, Plot.selectLast({
+      x: "month",
+      y: "citations",
+      text: ["Citations"],
+      textAnchor: "start",
+      dx: 10,
+      fill: "orange"
+    })),
+    Plot.text(monthlyData, Plot.selectLast({
+      x: "month",
+      y: "publications", 
+      text: ["Publications"],
+      textAnchor: "start",
+      dx: 10,
+      fill: "steelblue"
+    }))
+  ]
+})
+))
+}});
+
+define({id: "e7e7efad", outputs: ["categories","funding"], body: () => {
+// Create sample data for different chart types
+const categories = ['Physics', 'Chemistry', 'Biology', 'Mathematics', 'Computer Science'];
+const funding = categories.map(cat => ({
+  category: cat,
+  amount: Math.random() * 1000000 + 500000,
+  growth: (Math.random() - 0.5) * 20
+}));
+return {categories,funding};
+}});
+
+define({id: "46d1d33b", inputs: ["Plot","funding","display"], body: async (Plot,funding,display) => {
+display(await(
+Plot.plot({
+  title: "Research Funding by Field",
+  marginLeft: 120,
+  marginBottom: 50,
+  x: {
+    label: "Funding (millions)",
+    tickFormat: d => `$${(d/1000000).toFixed(1)}M`
+  },
+  marks: [
+    Plot.barX(funding.sort((a, b) => b.amount - a.amount), {
+      y: "category",
+      x: "amount",
+      fill: d => d.growth > 0 ? "green" : "red",
+      tip: true
+    })
+  ]
+})
+))
+}});
+
+define({id: "b7633f3c", inputs: ["Plot","funding","display"], body: async (Plot,funding,display) => {
+display(await(
+Plot.plot({
+  title: "Funding Growth Rate",
+  marginBottom: 50,
+  y: {
+    label: "Growth (%)",
+    grid: true,
+    zero: true
+  },
+  marks: [
+    Plot.dot(funding, {
+      x: "category",
+      y: "growth",
+      r: d => Math.sqrt(d.amount / 10000),
+      fill: d => d.growth > 0 ? "green" : "red",
+      tip: true
+    }),
+    Plot.ruleY([0])
+  ]
+})
+))
+}});
+
+define({id: "7fd46445", inputs: ["Inputs","Generators"], outputs: ["yearInput","year"], body: (Inputs,Generators) => {
+const yearInput = Inputs.range([2015, 2024], {value: 2024, step: 1, label: "Year"});
+const year = Generators.input(yearInput);
+return {yearInput,year};
+}});
+
+define({id: "b1ca70f8", inputs: ["Inputs","categories","Generators"], outputs: ["fieldSelect","field"], body: (Inputs,categories,Generators) => {
+const fieldSelect = Inputs.select(categories, {value: "Physics", label: "Field of Study"});
+const field = Generators.input(fieldSelect);
+return {fieldSelect,field};
+}});
+
+define({id: "0b402e72", mode: "inline", inputs: ["yearInput","display"], body: async (yearInput,display) => {
+display(await(
+yearInput
+))
+}});
+
+define({id: "5be77406", mode: "inline", inputs: ["fieldSelect","display"], body: async (fieldSelect,display) => {
+display(await(
+fieldSelect
+))
+}});
+
+define({id: "c0d2856b", mode: "inline", inputs: ["field","display"], body: async (field,display) => {
+display(await(
+field
+))
+}});
+
+define({id: "4cb4ea25", mode: "inline", inputs: ["year","display"], body: async (year,display) => {
+display(await(
+year
+))
+}});
+
+define({id: "15ccc602", inputs: ["funding","d3"], outputs: ["tableData"], body: (funding,d3) => {
+const tableData = funding.map(d => ({
+  Field: d.category,
+  "Funding Amount": d3.format("$,.0f")(d.amount),
+  "Growth Rate": d3.format("+.1%")(d.growth / 100),
+  "Researchers": Math.floor(Math.random() * 1000) + 500,
+  "Publications": Math.floor(Math.random() * 5000) + 1000
+}));
+return {tableData};
+}});
+
+define({id: "bca2c587", inputs: ["Inputs","tableData","display"], body: async (Inputs,tableData,display) => {
+display(await(
+Inputs.table(tableData, {
+  columns: ["Field", "Funding Amount", "Growth Rate", "Researchers", "Publications"],
+  header: {
+    Field: "Research Field",
+    "Funding Amount": "Annual Funding",
+    "Growth Rate": "YoY Growth"
+  },
+  width: {
+    Field: 150,
+    "Funding Amount": 120,
+    "Growth Rate": 100
+  },
+  sort: "Funding Amount",
+  reverse: true
 })
 ))
 }});
@@ -93,11 +282,27 @@ Plot.plot({
 <nav id="observablehq-sidebar">
   <ol>
     <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
-    <li class="observablehq-link observablehq-link-active"><a href="./">Observable Framework Project</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./">Research Report Publishing Platform</a></li>
   </ol>
   <ol>
     <li class="observablehq-link observablehq-link-active"><a href="./">Home</a></li>
   </ol>
+  <section>
+    <summary>Data Visualization</summary>
+    <ol>
+    <li class="observablehq-link"><a href="./statistical-analysis">Statistical Analysis</a></li>
+    <li class="observablehq-link"><a href="./time-series">Time Series</a></li>
+    <li class="observablehq-link"><a href="./geospatial">Geospatial Data</a></li>
+    <li class="observablehq-link"><a href="./network-analysis">Network Analysis</a></li>
+    </ol>
+  </section>
+  <section>
+    <summary>Reports &amp; Tables</summary>
+    <ol>
+    <li class="observablehq-link"><a href="./data-tables">Data Tables</a></li>
+    <li class="observablehq-link"><a href="./methods">Methods &amp; References</a></li>
+    </ol>
+  </section>
 </nav>
 <script>{const e=document.querySelector("#observablehq-sidebar"),o=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?o.checked=r==="true":o.indeterminate=!0;for(const t of document.querySelectorAll("#observablehq-sidebar summary")){const s=t.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${t.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
 <div id="observablehq-center">
@@ -105,56 +310,131 @@ Plot.plot({
 <nav>
 <div>Contents</div>
 <ol>
+<li class="observablehq-secondary-link"><a href="#platform-overview">Platform Overview</a></li>
+<li class="observablehq-secondary-link"><a href="#key-features">Key Features</a></li>
+<li class="observablehq-secondary-link"><a href="#sample-visualizations-gallery">Sample Visualizations Gallery</a></li>
+<li class="observablehq-secondary-link"><a href="#mathematical-equations">Mathematical Equations</a></li>
+<li class="observablehq-secondary-link"><a href="#interactive-controls">Interactive Controls</a></li>
+<li class="observablehq-secondary-link"><a href="#data-tables">Data Tables</a></li>
 <li class="observablehq-secondary-link"><a href="#getting-started">Getting Started</a></li>
-<li class="observablehq-secondary-link"><a href="#example-visualization">Example Visualization</a></li>
-<li class="observablehq-secondary-link"><a href="#project-structure">Project Structure</a></li>
-<li class="observablehq-secondary-link"><a href="#next-steps">Next Steps</a></li>
-<li class="observablehq-secondary-link"><a href="#resources">Resources</a></li>
+<li class="observablehq-secondary-link"><a href="#platform-architecture">Platform Architecture</a></li>
+<li class="observablehq-secondary-link"><a href="#citations-and-references">Citations and References</a></li>
 </ol>
 </nav>
 </aside>
 <main id="observablehq-main" class="observablehq">
-<h1 id="welcome-to-observable-framework" tabindex="-1"><a class="observablehq-header-anchor" href="#welcome-to-observable-framework">Welcome to Observable Framework</a></h1>
-<p>Observable Framework is a powerful tool for creating data-driven reports and interactive dashboards.</p>
-<h2 id="getting-started" tabindex="-1"><a class="observablehq-header-anchor" href="#getting-started">Getting Started</a></h2>
-<p>This template provides a starting point for your Observable Framework projects. It includes:</p>
-<ul>
-<li><strong>File-based routing</strong>: Create pages by adding Markdown files to the <code>src/</code> directory</li>
-<li><strong>Data loaders</strong>: Process data at build time with JavaScript data loaders</li>
-<li><strong>Interactive visualizations</strong>: Use D3.js and Observable Plot for rich data visualizations</li>
-<li><strong>PDF export</strong>: Convert your reports to professional PDFs</li>
-</ul>
-<h2 id="example-visualization" tabindex="-1"><a class="observablehq-header-anchor" href="#example-visualization">Example Visualization</a></h2>
-<p>Here's a simple example using Observable Plot:</p>
+<h1 id="research-report-publishing-platform" tabindex="-1"><a class="observablehq-header-anchor" href="#research-report-publishing-platform">Research Report Publishing Platform</a></h1>
+<p>Welcome to the <strong>Research Report Publishing Platform</strong> - a modern framework for creating interactive data visualizations and professional research reports. This platform combines the power of Observable Framework with sophisticated PDF generation to bridge the gap between dynamic web dashboards and traditional academic publishing.</p>
 <div class="observablehq observablehq--block"><!--:7c75f0ab:--></div>
-<div class="observablehq observablehq--block"><!--:4ed6a314:--></div>
-<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:c97d508a:--></div>
-<h2 id="project-structure" tabindex="-1"><a class="observablehq-header-anchor" href="#project-structure">Project Structure</a></h2>
-<pre><code>src/
-├── index.md          # This file - the homepage
-├── components/       # Reusable visualization components
-│   ├── timeline.js   # Timeline visualization component
-│   └── sankey-diagram.js # Sankey diagram component
-└── data/            # Data loaders and static data files
-    └── example.csv.js # Example data loader
-</code></pre>
-<h2 id="next-steps" tabindex="-1"><a class="observablehq-header-anchor" href="#next-steps">Next Steps</a></h2>
+<h2 id="platform-overview" tabindex="-1"><a class="observablehq-header-anchor" href="#platform-overview">Platform Overview</a></h2>
+<p>This demonstration site showcases the capabilities of combining <strong>Observable Framework</strong> with academic research workflows. Navigate through the examples in the sidebar to explore different visualization types and report formats.</p>
+<h3 id="quick-statistics-dashboard" tabindex="-1"><a class="observablehq-header-anchor" href="#quick-statistics-dashboard">Quick Statistics Dashboard</a></h3>
+<div class="observablehq observablehq--block"><!--:ce7d251c:--></div>
+<div class="grid grid-cols-4">
+  <div class="card">
+    <h2>Publications</h2>
+    <span class="big"><observablehq-loading></observablehq-loading><!--:c9a9009c:--></span>
+    <span class="muted">Total papers</span>
+  </div>
+  <div class="card">
+    <h2>Citations</h2>
+    <span class="big"><observablehq-loading></observablehq-loading><!--:fc1f0b61:--></span>
+    <span class="muted">Total citations</span>
+  </div>
+  <div class="card">
+    <h2>h-index</h2>
+    <span class="big"><observablehq-loading></observablehq-loading><!--:eb03b392:--></span>
+    <span class="muted">Research impact</span>
+  </div>
+  <div class="card">
+    <h2>Collaborators</h2>
+    <span class="big"><observablehq-loading></observablehq-loading><!--:2baf2137:--></span>
+    <span class="muted">Co-authors</span>
+  </div>
+</div>
+<h3 id="research-output-trends" tabindex="-1"><a class="observablehq-header-anchor" href="#research-output-trends">Research Output Trends</a></h3>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:86d257a5:--></div>
+<h2 id="key-features" tabindex="-1"><a class="observablehq-header-anchor" href="#key-features">Key Features</a></h2>
+<h3 id="rich-data-visualizations" tabindex="-1"><a class="observablehq-header-anchor" href="#rich-data-visualizations">📊 Rich Data Visualizations</a></h3>
+<p>Explore our comprehensive visualization examples including statistical plots, time series analysis, geographic maps, and network diagrams<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>. Each example demonstrates best practices for academic data presentation.</p>
+<h3 id="professional-pdf-export" tabindex="-1"><a class="observablehq-header-anchor" href="#professional-pdf-export">📄 Professional PDF Export</a></h3>
+<p>Every page on this site can be exported to PDF with automatic formatting, page breaks, and QR codes linking back to the interactive version<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>. The export system handles complex layouts including multi-page tables and figures.</p>
+<h3 id="reproducible-research" tabindex="-1"><a class="observablehq-header-anchor" href="#reproducible-research">🔬 Reproducible Research</a></h3>
+<p>All data processing happens at build time using JavaScript data loaders, ensuring reproducibility and version control<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup>. View the source code for any visualization directly in your browser.</p>
+<h2 id="sample-visualizations-gallery" tabindex="-1"><a class="observablehq-header-anchor" href="#sample-visualizations-gallery">Sample Visualizations Gallery</a></h2>
+<div class="observablehq observablehq--block"><!--:e7e7efad:--></div>
+<div class="grid grid-cols-2">
+  <div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:46d1d33b:--></div>
+  </div>
+  <div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:b7633f3c:--></div>
+  </div>
+</div>
+<h2 id="mathematical-equations" tabindex="-1"><a class="observablehq-header-anchor" href="#mathematical-equations">Mathematical Equations</a></h2>
+<p>The platform supports mathematical notation using TeX. For example, the normal distribution probability density function:</p>
+<p>$$f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}$$</p>
+<p>Or inline equations like the correlation coefficient: $r = \frac{\sum_{i=1}^{n}(x_i - \bar{x})(y_i - \bar{y})}{\sqrt{\sum_{i=1}^{n}(x_i - \bar{x})^2}\sqrt{\sum_{i=1}^{n}(y_i - \bar{y})^2}}$</p>
+<h2 id="interactive-controls" tabindex="-1"><a class="observablehq-header-anchor" href="#interactive-controls">Interactive Controls</a></h2>
+<div class="observablehq observablehq--block"><!--:7fd46445:--></div>
+<div class="observablehq observablehq--block"><!--:b1ca70f8:--></div>
+<div class="grid grid-cols-2">
+  <div><observablehq-loading></observablehq-loading><!--:0b402e72:--></div>
+  <div><observablehq-loading></observablehq-loading><!--:5be77406:--></div>
+</div>
+<p>You selected: <strong><observablehq-loading></observablehq-loading><!--:c0d2856b:--></strong> in <strong><observablehq-loading></observablehq-loading><!--:4cb4ea25:--></strong></p>
+<h2 id="data-tables" tabindex="-1"><a class="observablehq-header-anchor" href="#data-tables">Data Tables</a></h2>
+<div class="observablehq observablehq--block"><!--:15ccc602:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:bca2c587:--></div>
+<h2 id="getting-started" tabindex="-1"><a class="observablehq-header-anchor" href="#getting-started">Getting Started</a></h2>
+<h3 id="for-researchers" tabindex="-1"><a class="observablehq-header-anchor" href="#for-researchers">For Researchers</a></h3>
 <ol>
-<li><strong>Add pages</strong>: Create new <code>.md</code> files in the <code>src/</code> directory</li>
-<li><strong>Load data</strong>: Add data loaders to <code>src/data/</code></li>
-<li><strong>Create visualizations</strong>: Use the included components or create your own</li>
-<li><strong>Build and deploy</strong>: Run <code>npm run build</code> to generate a static site</li>
+<li><strong>Explore the examples</strong> - Navigate through the sidebar to see different visualization types</li>
+<li><strong>View the source</strong> - Click on any code block to see how visualizations are created</li>
+<li><strong>Export to PDF</strong> - Use the PDF export feature to create print-ready reports</li>
 </ol>
-<h2 id="resources" tabindex="-1"><a class="observablehq-header-anchor" href="#resources">Resources</a></h2>
+<h3 id="for-developers" tabindex="-1"><a class="observablehq-header-anchor" href="#for-developers">For Developers</a></h3>
+<ol>
+<li><strong>Clone the repository</strong>:<pre data-language="bash"><code class="language-bash">git <span class="hljs-built_in">clone</span> https://github.com/SustainableDevelopmentReform/research-report.git
+</code></pre>
+</li>
+<li><strong>Install dependencies</strong>:<pre data-language="bash"><code class="language-bash">npm install &amp;&amp; <span class="hljs-built_in">cd</span> pdf-export &amp;&amp; npm install
+</code></pre>
+</li>
+<li><strong>Start developing</strong>:<pre data-language="bash"><code class="language-bash">npm run dev
+</code></pre>
+</li>
+</ol>
+<h2 id="platform-architecture" tabindex="-1"><a class="observablehq-header-anchor" href="#platform-architecture">Platform Architecture</a></h2>
+<p>This platform combines several powerful technologies:</p>
 <ul>
-<li><a href="https://observablehq.com/framework/" target="_blank" rel="noopener noreferrer">Observable Framework Documentation</a></li>
-<li><a href="https://observablehq.com/plot/" target="_blank" rel="noopener noreferrer">Observable Plot</a></li>
-<li><a href="https://d3js.org/" target="_blank" rel="noopener noreferrer">D3.js</a></li>
+<li><strong>Observable Framework</strong> - Reactive data visualizations and notebooks<sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup></li>
+<li><strong>D3.js</strong> - Low-level visualization primitives</li>
+<li><strong>Observable Plot</strong> - High-level grammar of graphics</li>
+<li><strong>Puppeteer</strong> - Automated PDF generation</li>
+<li><strong>GitHub Pages</strong> - Free hosting for public research</li>
 </ul>
+<h2 id="citations-and-references" tabindex="-1"><a class="observablehq-header-anchor" href="#citations-and-references">Citations and References</a></h2>
+<p>This demonstration uses synthetic data for illustration purposes. In real research applications, you would load your actual datasets and include proper citations<sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup>.</p>
 <hr>
-<p><em>Built with Observable Framework</em></p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>Observable Framework provides a reactive programming model where visualizations automatically update when data changes. This is particularly useful for exploratory data analysis and interactive dashboards. <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>The PDF export pipeline uses Puppeteer to render pages with print-specific CSS, ensuring that tables don't break across pages and figures are properly captioned. QR codes are automatically injected to link print versions to their interactive counterparts. <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p>Data loaders run at build time, not runtime, which means your data processing is version-controlled and reproducible. This follows best practices for computational reproducibility in research. <a href="#fnref3" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn4" class="footnote-item"><p>The architecture is inspired by computational notebooks like Jupyter, but with better support for web deployment and interactivity. See <a href="https://observablehq.com/framework/" target="_blank" rel="noopener noreferrer">Observable Framework documentation</a> for technical details. <a href="#fnref4" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn5" class="footnote-item"><p>For real research projects, we recommend using a reference manager like Zotero or Mendeley to maintain your bibliography, then importing formatted citations into your markdown files. <a href="#fnref5" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
 </main>
 <footer id="observablehq-footer">
+<nav><a rel="next" href="./statistical-analysis"><span>Statistical Analysis</span></a></nav>
 <div>Built with Observable Framework on Aug 11, 2025.</div>
 </footer>
 </div>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="generator" content="Observable Framework v1.13.3">
+<title>Data Tables &amp; Reports | Research Report Publishing Platform</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-air,near-midnight.dcdbf18e.css">
+<link rel="preload" as="style" href="./_observablehq/stdlib/inputs.ea9fd553.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-air,near-midnight.dcdbf18e.css">
+<link rel="stylesheet" type="text/css" href="./_observablehq/stdlib/inputs.ea9fd553.css">
+<link rel="modulepreload" href="./_observablehq/client.5446bbef.js">
+<link rel="modulepreload" href="./_observablehq/runtime.e080113b.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.24b62b2e.js">
+<link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.17/d761ef9b.js">
+<link rel="modulepreload" href="./_npm/d3@7.9.0/e780feca.js">
+<link rel="modulepreload" href="./_observablehq/stdlib/inputs.b5a86791.js">
+<link rel="modulepreload" href="./_npm/htl@0.3.1/72f4716c.js">
+<link rel="modulepreload" href="./_npm/isoformat@0.2.1/18cbf477.js">
+<link rel="modulepreload" href="./_npm/interval-tree-1d@1.0.4/53fe8176.js">
+<link rel="modulepreload" href="./_npm/d3-array@3.2.4/e93ca09f.js">
+<link rel="modulepreload" href="./_npm/d3-axis@3.0.0/0f2de24d.js">
+<link rel="modulepreload" href="./_npm/d3-brush@3.0.0/65eb105b.js">
+<link rel="modulepreload" href="./_npm/d3-chord@3.0.1/7ef8fb2e.js">
+<link rel="modulepreload" href="./_npm/d3-color@3.1.0/aeb57b94.js">
+<link rel="modulepreload" href="./_npm/d3-contour@4.0.2/1d2aed74.js">
+<link rel="modulepreload" href="./_npm/d3-delaunay@6.0.4/5ced1d52.js">
+<link rel="modulepreload" href="./_npm/d3-dispatch@3.0.1/9ba9c7f3.js">
+<link rel="modulepreload" href="./_npm/d3-drag@3.0.0/4202580c.js">
+<link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/9cffc2bd.js">
+<link rel="modulepreload" href="./_npm/d3-ease@3.0.1/cdd7e898.js">
+<link rel="modulepreload" href="./_npm/d3-fetch@3.0.1/b4e2ad9a.js">
+<link rel="modulepreload" href="./_npm/d3-force@3.0.0/5e804d15.js">
+<link rel="modulepreload" href="./_npm/d3-format@3.1.0/86074ef6.js">
+<link rel="modulepreload" href="./_npm/d3-geo@3.1.1/40599fb3.js">
+<link rel="modulepreload" href="./_npm/d3-hierarchy@3.1.2/e49e792c.js">
+<link rel="modulepreload" href="./_npm/d3-interpolate@3.0.1/8d1e5425.js">
+<link rel="modulepreload" href="./_npm/d3-path@3.1.0/20d3f133.js">
+<link rel="modulepreload" href="./_npm/d3-polygon@3.0.1/7553081f.js">
+<link rel="modulepreload" href="./_npm/d3-quadtree@3.0.1/0dfd751c.js">
+<link rel="modulepreload" href="./_npm/d3-random@3.0.1/3c90ee06.js">
+<link rel="modulepreload" href="./_npm/d3-scale@4.0.2/843b6a76.js">
+<link rel="modulepreload" href="./_npm/d3-scale-chromatic@3.1.0/ba24c2e7.js">
+<link rel="modulepreload" href="./_npm/d3-selection@3.0.0/4d94e5b7.js">
+<link rel="modulepreload" href="./_npm/d3-shape@3.2.0/6d3a6726.js">
+<link rel="modulepreload" href="./_npm/d3-time@3.1.0/9f03c579.js">
+<link rel="modulepreload" href="./_npm/d3-time-format@4.1.0/07c9626f.js">
+<link rel="modulepreload" href="./_npm/d3-timer@3.0.1/b58a267d.js">
+<link rel="modulepreload" href="./_npm/d3-transition@3.0.1/004da2ac.js">
+<link rel="modulepreload" href="./_npm/d3-zoom@3.0.0/b5786b3f.js">
+<link rel="modulepreload" href="./_npm/binary-search-bounds@2.0.5/cbf6ba23.js">
+<link rel="modulepreload" href="./_npm/internmap@2.0.3/e08981d9.js">
+<link rel="modulepreload" href="./_npm/delaunator@5.0.1/02d43215.js">
+<link rel="modulepreload" href="./_npm/robust-predicates@3.0.2/aa00730b.js">
+<link rel="icon" href="./_file/observable.1af93621.png" type="image/png" sizes="32x32">
+<script type="module">
+
+import {define} from "./_observablehq/client.5446bbef.js";
+
+define({id: "7c75f0ab", outputs: ["Plot","d3"], body: async () => {
+const [Plot, d3] = await Promise.all([import("./_npm/@observablehq/plot@0.6.17/d761ef9b.js"), import("./_npm/d3@7.9.0/e780feca.js")]);
+
+return {Plot,d3};
+}});
+
+define({id: "9cf3b819", inputs: ["d3"], outputs: ["researchData","enrichedData"], body: (d3) => {
+// Generate comprehensive research dataset
+const researchData = d3.range(50).map(i => ({
+  id: `SUBJ-${String(i + 1).padStart(3, '0')}`,
+  age: Math.floor(d3.randomNormal(45, 15)()),
+  gender: Math.random() > 0.5 ? "Male" : "Female",
+  group: i < 25 ? "Control" : "Treatment",
+  baseline: d3.randomNormal(100, 15)(),
+  followup1: d3.randomNormal(i < 25 ? 100 : 110, 15)(),
+  followup2: d3.randomNormal(i < 25 ? 100 : 115, 18)(),
+  completed: Math.random() > 0.1,
+  site: ["Site A", "Site B", "Site C"][Math.floor(Math.random() * 3)]
+}));
+
+// Calculate derived metrics
+const enrichedData = researchData.map(d => ({
+  ...d,
+  change1: d.followup1 - d.baseline,
+  change2: d.followup2 - d.baseline,
+  percentChange: ((d.followup2 - d.baseline) / d.baseline * 100)
+}));
+return {researchData,enrichedData};
+}});
+
+define({id: "5052e8d8", inputs: ["Inputs","Generators"], outputs: ["viewInput","view"], body: (Inputs,Generators) => {
+const viewInput = Inputs.select(["Summary", "Full Dataset", "By Group", "By Site"], {
+  value: "Summary",
+  label: "View"
+});
+const view = Generators.input(viewInput);
+return {viewInput,view};
+}});
+
+define({id: "26b0e10e", mode: "inline", inputs: ["viewInput","display"], body: async (viewInput,display) => {
+display(await(
+viewInput
+))
+}});
+
+define({id: "846c7db2", inputs: ["view","d3","enrichedData"], outputs: ["getTableData"], body: (view,d3,enrichedData) => {
+const getTableData = () => {
+  if (view === "Summary") {
+    const summary = d3.rollup(
+      enrichedData,
+      v => ({
+        n: v.length,
+        meanAge: d3.mean(v, d => d.age),
+        meanBaseline: d3.mean(v, d => d.baseline),
+        meanFollowup1: d3.mean(v, d => d.followup1),
+        meanFollowup2: d3.mean(v, d => d.followup2),
+        meanChange: d3.mean(v, d => d.change2),
+        completed: d3.sum(v, d => d.completed ? 1 : 0)
+      }),
+      d => d.group
+    );
+    
+    return Array.from(summary, ([group, stats]) => ({
+      Group: group,
+      N: stats.n,
+      "Mean Age": stats.meanAge.toFixed(1),
+      "Baseline": stats.meanBaseline.toFixed(2),
+      "Follow-up 1": stats.meanFollowup1.toFixed(2),
+      "Follow-up 2": stats.meanFollowup2.toFixed(2),
+      "Mean Change": stats.meanChange.toFixed(2),
+      "Completion Rate": `${(stats.completed / stats.n * 100).toFixed(1)}%`
+    }));
+  } else if (view === "By Site") {
+    const bySite = d3.rollup(
+      enrichedData,
+      v => ({
+        control: d3.sum(v, d => d.group === "Control" ? 1 : 0),
+        treatment: d3.sum(v, d => d.group === "Treatment" ? 1 : 0),
+        meanAge: d3.mean(v, d => d.age),
+        meanChange: d3.mean(v, d => d.change2)
+      }),
+      d => d.site
+    );
+    
+    return Array.from(bySite, ([site, stats]) => ({
+      Site: site,
+      Control: stats.control,
+      Treatment: stats.treatment,
+      Total: stats.control + stats.treatment,
+      "Mean Age": stats.meanAge.toFixed(1),
+      "Mean Change": stats.meanChange.toFixed(2)
+    }));
+  } else if (view === "By Group") {
+    return enrichedData.filter(d => d.completed).map(d => ({
+      ID: d.id,
+      Group: d.group,
+      Age: d.age,
+      Gender: d.gender,
+      Baseline: d.baseline.toFixed(2),
+      "Follow-up 2": d.followup2.toFixed(2),
+      Change: d.change2.toFixed(2),
+      "% Change": d.percentChange.toFixed(1)
+    }));
+  } else {
+    return enrichedData.map(d => ({
+      ID: d.id,
+      Site: d.site,
+      Group: d.group,
+      Age: d.age,
+      Gender: d.gender,
+      Baseline: d.baseline.toFixed(2),
+      "FU1": d.followup1.toFixed(2),
+      "FU2": d.followup2.toFixed(2),
+      "Δ1": d.change1.toFixed(2),
+      "Δ2": d.change2.toFixed(2),
+      Status: d.completed ? "Complete" : "Dropout"
+    }));
+  }
+};
+return {getTableData};
+}});
+
+define({id: "f8b5aa31", inputs: ["Inputs","getTableData","view"], body: (Inputs,getTableData,view) => {
+Inputs.table(getTableData(), {
+  sort: view === "Summary" ? "Group" : "ID",
+  reverse: false,
+  layout: "auto"
+})
+}});
+
+define({id: "11d5dee0", inputs: ["d3","enrichedData"], outputs: ["generateStats","statsReport"], body: (d3,enrichedData) => {
+// Generate comprehensive statistics
+const generateStats = (data, label) => {
+  const values = data.map(d => d.followup2 - d.baseline);
+  return {
+    Measure: label,
+    N: data.length,
+    Mean: d3.mean(values).toFixed(2),
+    SD: d3.deviation(values).toFixed(2),
+    SE: (d3.deviation(values) / Math.sqrt(data.length)).toFixed(3),
+    "95% CI": `[${(d3.mean(values) - 1.96 * d3.deviation(values) / Math.sqrt(data.length)).toFixed(2)}, ${(d3.mean(values) + 1.96 * d3.deviation(values) / Math.sqrt(data.length)).toFixed(2)}]`,
+    Min: d3.min(values).toFixed(2),
+    Q1: d3.quantile(values, 0.25).toFixed(2),
+    Median: d3.median(values).toFixed(2),
+    Q3: d3.quantile(values, 0.75).toFixed(2),
+    Max: d3.max(values).toFixed(2)
+  };
+};
+
+const statsReport = [
+  generateStats(enrichedData.filter(d => d.group === "Control"), "Control Group"),
+  generateStats(enrichedData.filter(d => d.group === "Treatment"), "Treatment Group"),
+  generateStats(enrichedData, "Overall")
+];
+return {generateStats,statsReport};
+}});
+
+define({id: "a4fbb17a", inputs: ["Inputs","statsReport","display"], body: async (Inputs,statsReport,display) => {
+display(await(
+Inputs.table(statsReport, {
+  columns: ["Measure", "N", "Mean", "SD", "SE", "95% CI", "Min", "Q1", "Median", "Q3", "Max"]
+})
+))
+}});
+
+define({id: "5210347d", inputs: ["d3","enrichedData"], outputs: ["publicationTable","pubTableData"], body: (d3,enrichedData) => {
+// Create publication-ready table
+const publicationTable = d3.rollup(
+  enrichedData,
+  v => {
+    const baseline = v.map(d => d.baseline);
+    const followup = v.map(d => d.followup2);
+    const change = v.map(d => d.change2);
+    
+    return {
+      n: v.length,
+      baseline: `${d3.mean(baseline).toFixed(1)} ± ${d3.deviation(baseline).toFixed(1)}`,
+      followup: `${d3.mean(followup).toFixed(1)} ± ${d3.deviation(followup).toFixed(1)}`,
+      change: `${d3.mean(change).toFixed(1)} ± ${d3.deviation(change).toFixed(1)}`,
+      pValue: d3.mean(change) > 5 ? "< 0.001***" : d3.mean(change) > 2 ? "0.012*" : "0.234"
+    };
+  },
+  d => d.group
+);
+
+const pubTableData = Array.from(publicationTable, ([group, stats]) => ({
+  "Study Group": group,
+  "N": stats.n,
+  "Baseline (mean ± SD)": stats.baseline,
+  "Follow-up (mean ± SD)": stats.followup,
+  "Change (mean ± SD)": stats.change,
+  "p-value": stats.pValue
+}));
+return {publicationTable,pubTableData};
+}});
+
+define({id: "7c9e3e10", inputs: ["Inputs","pubTableData","display"], body: async (Inputs,pubTableData,display) => {
+display(await(
+Inputs.table(pubTableData, {
+  columns: ["Study Group", "N", "Baseline (mean ± SD)", "Follow-up (mean ± SD)", "Change (mean ± SD)", "p-value"]
+})
+))
+}});
+
+define({id: "b5dde4e7", inputs: ["d3","enrichedData"], outputs: ["missingReport","missingTableData"], body: (d3,enrichedData) => {
+// Analyze missing data patterns
+const missingReport = d3.rollup(
+  enrichedData,
+  v => ({
+    enrolled: v.length,
+    completed: d3.sum(v, d => d.completed ? 1 : 0),
+    dropout: d3.sum(v, d => !d.completed ? 1 : 0),
+    dropoutRate: `${((1 - d3.sum(v, d => d.completed ? 1 : 0) / v.length) * 100).toFixed(1)}%`
+  }),
+  d => d.site,
+  d => d.group
+);
+
+const missingTableData = [];
+missingReport.forEach((groups, site) => {
+  groups.forEach((stats, group) => {
+    missingTableData.push({
+      Site: site,
+      Group: group,
+      Enrolled: stats.enrolled,
+      Completed: stats.completed,
+      Dropout: stats.dropout,
+      "Dropout Rate": stats.dropoutRate
+    });
+  });
+});
+return {missingReport,missingTableData};
+}});
+
+define({id: "d498e047", inputs: ["Inputs","missingTableData","display"], body: async (Inputs,missingTableData,display) => {
+display(await(
+Inputs.table(missingTableData, {
+  columns: ["Site", "Group", "Enrolled", "Completed", "Dropout", "Dropout Rate"],
+  sort: "Site"
+})
+))
+}});
+
+</script>
+</head>
+<body>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link"><a href="./">Research Report Publishing Platform</a></li>
+  </ol>
+  <ol>
+    <li class="observablehq-link"><a href="./">Home</a></li>
+  </ol>
+  <section>
+    <summary>Data Visualization</summary>
+    <ol>
+    <li class="observablehq-link"><a href="./statistical-analysis">Statistical Analysis</a></li>
+    <li class="observablehq-link"><a href="./time-series">Time Series</a></li>
+    <li class="observablehq-link"><a href="./geospatial">Geospatial Data</a></li>
+    <li class="observablehq-link"><a href="./network-analysis">Network Analysis</a></li>
+    </ol>
+  </section>
+  <section class="observablehq-section-active">
+    <summary>Reports &amp; Tables</summary>
+    <ol>
+    <li class="observablehq-link observablehq-link-active"><a href="./data-tables">Data Tables</a></li>
+    <li class="observablehq-link"><a href="./methods">Methods &amp; References</a></li>
+    </ol>
+  </section>
+</nav>
+<script>{const e=document.querySelector("#observablehq-sidebar"),o=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?o.checked=r==="true":o.indeterminate=!0;for(const t of document.querySelectorAll("#observablehq-sidebar summary")){const s=t.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${t.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<div id="observablehq-center">
+<aside id="observablehq-toc" data-selector="h1:not(:first-of-type)[id], h2:first-child[id], :not(h1) + h2[id]">
+<nav>
+<div>Contents</div>
+<ol>
+<li class="observablehq-secondary-link"><a href="#research-dataset-summary">Research Dataset Summary</a></li>
+<li class="observablehq-secondary-link"><a href="#interactive-data-table">Interactive Data Table</a></li>
+<li class="observablehq-secondary-link"><a href="#statistical-summary-report">Statistical Summary Report</a></li>
+<li class="observablehq-secondary-link"><a href="#formatted-publication-table">Formatted Publication Table</a></li>
+<li class="observablehq-secondary-link"><a href="#missing-data-report">Missing Data Report</a></li>
+<li class="observablehq-secondary-link"><a href="#export-options">Export Options</a></li>
+<li class="observablehq-secondary-link"><a href="#best-practices-for-research-tables">Best Practices for Research Tables</a></li>
+</ol>
+</nav>
+</aside>
+<main id="observablehq-main" class="observablehq">
+<h1 id="data-tables-and-reports" tabindex="-1"><a class="observablehq-header-anchor" href="#data-tables-and-reports">Data Tables &amp; Reports</a></h1>
+<p>Professional data presentation is essential for research communication<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>. This page demonstrates advanced table formatting and reporting capabilities.</p>
+<div class="observablehq observablehq--block"><!--:7c75f0ab:--></div>
+<h2 id="research-dataset-summary" tabindex="-1"><a class="observablehq-header-anchor" href="#research-dataset-summary">Research Dataset Summary</a></h2>
+<div class="observablehq observablehq--block"><!--:9cf3b819:--></div>
+<h2 id="interactive-data-table" tabindex="-1"><a class="observablehq-header-anchor" href="#interactive-data-table">Interactive Data Table</a></h2>
+<div class="observablehq observablehq--block"><!--:5052e8d8:--></div>
+<p><observablehq-loading></observablehq-loading><!--:26b0e10e:--></p>
+<div class="observablehq observablehq--block"><!--:846c7db2:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:f8b5aa31:--></div>
+<h2 id="statistical-summary-report" tabindex="-1"><a class="observablehq-header-anchor" href="#statistical-summary-report">Statistical Summary Report</a></h2>
+<div class="observablehq observablehq--block"><!--:11d5dee0:--></div>
+<h3 id="table-1-statistical-summary-of-treatment-effects" tabindex="-1"><a class="observablehq-header-anchor" href="#table-1-statistical-summary-of-treatment-effects">Table 1: Statistical Summary of Treatment Effects<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></a></h3>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:a4fbb17a:--></div>
+<h2 id="formatted-publication-table" tabindex="-1"><a class="observablehq-header-anchor" href="#formatted-publication-table">Formatted Publication Table</a></h2>
+<div class="observablehq observablehq--block"><!--:5210347d:--></div>
+<h3 id="table-2-primary-outcome-results-by-treatment-group" tabindex="-1"><a class="observablehq-header-anchor" href="#table-2-primary-outcome-results-by-treatment-group">Table 2: Primary Outcome Results by Treatment Group<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup></a></h3>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:7c9e3e10:--></div>
+<p>*p &lt; 0.05; **p &lt; 0.01; ***p &lt; 0.001</p>
+<h2 id="missing-data-report" tabindex="-1"><a class="observablehq-header-anchor" href="#missing-data-report">Missing Data Report</a></h2>
+<div class="observablehq observablehq--block"><!--:b5dde4e7:--></div>
+<h3 id="table-3-study-completion-by-site-and-treatment-group" tabindex="-1"><a class="observablehq-header-anchor" href="#table-3-study-completion-by-site-and-treatment-group">Table 3: Study Completion by Site and Treatment Group<sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup></a></h3>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:d498e047:--></div>
+<h2 id="export-options" tabindex="-1"><a class="observablehq-header-anchor" href="#export-options">Export Options</a></h2>
+<p>Tables can be exported in multiple formats<sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup>:</p>
+<ul>
+<li><strong>CSV</strong>: For data analysis in R, Python, or Excel</li>
+<li><strong>LaTeX</strong>: For academic publications</li>
+<li><strong>Markdown</strong>: For reports and documentation</li>
+<li><strong>PDF</strong>: Via the integrated PDF export pipeline</li>
+</ul>
+<h2 id="best-practices-for-research-tables" tabindex="-1"><a class="observablehq-header-anchor" href="#best-practices-for-research-tables">Best Practices for Research Tables</a></h2>
+<ol>
+<li><strong>Clear Headers</strong>: Use descriptive column names with units</li>
+<li><strong>Appropriate Precision</strong>: Report statistics to meaningful decimal places</li>
+<li><strong>Missing Data</strong>: Always report and explain missing values</li>
+<li><strong>Footnotes</strong>: Use footnotes for methodological details<sup class="footnote-ref"><a href="#fn6" id="fnref6">[6]</a></sup></li>
+<li><strong>Consistency</strong>: Maintain consistent formatting across tables</li>
+</ol>
+<hr>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>Effective table design is crucial for research communication. Few, S. (2012). Show Me the Numbers: Designing Tables and Graphs to Enlighten. Analytics Press. <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>Statistical summaries should include measures of central tendency and dispersion. The 95% confidence interval provides the range of plausible values for the population parameter. <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p>Publication tables should follow journal guidelines. Most biomedical journals require reporting of means ± standard deviations and p-values for hypothesis tests. <a href="#fnref3" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn4" class="footnote-item"><p>Missing data patterns can introduce bias. Little, R.J.A., &amp; Rubin, D.B. (2019). Statistical Analysis with Missing Data (3rd ed.). Wiley. <a href="#fnref4" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn5" class="footnote-item"><p>Data export functionality ensures reproducibility and enables secondary analysis. Follow FAIR principles: Findable, Accessible, Interoperable, and Reusable. <a href="#fnref5" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn6" class="footnote-item"><p>Table footnotes should clarify abbreviations, statistical methods, and any data transformations applied. Keep footnotes concise but complete. <a href="#fnref6" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+</main>
+<footer id="observablehq-footer">
+<nav><a rel="prev" href="./network-analysis"><span>Network Analysis</span></a><a rel="next" href="./methods"><span>Methods &amp; References</span></a></nav>
+<div>Built with Observable Framework on Aug 11, 2025.</div>
+</footer>
+</div>
+</body>
+</html>

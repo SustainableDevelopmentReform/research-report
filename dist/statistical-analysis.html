@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="generator" content="Observable Framework v1.13.3">
+<title>Statistical Analysis | Research Report Publishing Platform</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-air,near-midnight.dcdbf18e.css">
+<link rel="preload" as="style" href="./_observablehq/stdlib/inputs.ea9fd553.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-air,near-midnight.dcdbf18e.css">
+<link rel="stylesheet" type="text/css" href="./_observablehq/stdlib/inputs.ea9fd553.css">
+<link rel="modulepreload" href="./_observablehq/client.5446bbef.js">
+<link rel="modulepreload" href="./_observablehq/runtime.e080113b.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.24b62b2e.js">
+<link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.17/d761ef9b.js">
+<link rel="modulepreload" href="./_npm/d3@7.9.0/e780feca.js">
+<link rel="modulepreload" href="./_observablehq/stdlib/inputs.b5a86791.js">
+<link rel="modulepreload" href="./_npm/htl@0.3.1/72f4716c.js">
+<link rel="modulepreload" href="./_npm/isoformat@0.2.1/18cbf477.js">
+<link rel="modulepreload" href="./_npm/interval-tree-1d@1.0.4/53fe8176.js">
+<link rel="modulepreload" href="./_npm/d3-array@3.2.4/e93ca09f.js">
+<link rel="modulepreload" href="./_npm/d3-axis@3.0.0/0f2de24d.js">
+<link rel="modulepreload" href="./_npm/d3-brush@3.0.0/65eb105b.js">
+<link rel="modulepreload" href="./_npm/d3-chord@3.0.1/7ef8fb2e.js">
+<link rel="modulepreload" href="./_npm/d3-color@3.1.0/aeb57b94.js">
+<link rel="modulepreload" href="./_npm/d3-contour@4.0.2/1d2aed74.js">
+<link rel="modulepreload" href="./_npm/d3-delaunay@6.0.4/5ced1d52.js">
+<link rel="modulepreload" href="./_npm/d3-dispatch@3.0.1/9ba9c7f3.js">
+<link rel="modulepreload" href="./_npm/d3-drag@3.0.0/4202580c.js">
+<link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/9cffc2bd.js">
+<link rel="modulepreload" href="./_npm/d3-ease@3.0.1/cdd7e898.js">
+<link rel="modulepreload" href="./_npm/d3-fetch@3.0.1/b4e2ad9a.js">
+<link rel="modulepreload" href="./_npm/d3-force@3.0.0/5e804d15.js">
+<link rel="modulepreload" href="./_npm/d3-format@3.1.0/86074ef6.js">
+<link rel="modulepreload" href="./_npm/d3-geo@3.1.1/40599fb3.js">
+<link rel="modulepreload" href="./_npm/d3-hierarchy@3.1.2/e49e792c.js">
+<link rel="modulepreload" href="./_npm/d3-interpolate@3.0.1/8d1e5425.js">
+<link rel="modulepreload" href="./_npm/d3-path@3.1.0/20d3f133.js">
+<link rel="modulepreload" href="./_npm/d3-polygon@3.0.1/7553081f.js">
+<link rel="modulepreload" href="./_npm/d3-quadtree@3.0.1/0dfd751c.js">
+<link rel="modulepreload" href="./_npm/d3-random@3.0.1/3c90ee06.js">
+<link rel="modulepreload" href="./_npm/d3-scale@4.0.2/843b6a76.js">
+<link rel="modulepreload" href="./_npm/d3-scale-chromatic@3.1.0/ba24c2e7.js">
+<link rel="modulepreload" href="./_npm/d3-selection@3.0.0/4d94e5b7.js">
+<link rel="modulepreload" href="./_npm/d3-shape@3.2.0/6d3a6726.js">
+<link rel="modulepreload" href="./_npm/d3-time@3.1.0/9f03c579.js">
+<link rel="modulepreload" href="./_npm/d3-time-format@4.1.0/07c9626f.js">
+<link rel="modulepreload" href="./_npm/d3-timer@3.0.1/b58a267d.js">
+<link rel="modulepreload" href="./_npm/d3-transition@3.0.1/004da2ac.js">
+<link rel="modulepreload" href="./_npm/d3-zoom@3.0.0/b5786b3f.js">
+<link rel="modulepreload" href="./_npm/binary-search-bounds@2.0.5/cbf6ba23.js">
+<link rel="modulepreload" href="./_npm/internmap@2.0.3/e08981d9.js">
+<link rel="modulepreload" href="./_npm/delaunator@5.0.1/02d43215.js">
+<link rel="modulepreload" href="./_npm/robust-predicates@3.0.2/aa00730b.js">
+<link rel="icon" href="./_file/observable.1af93621.png" type="image/png" sizes="32x32">
+<script type="module">
+
+import {define} from "./_observablehq/client.5446bbef.js";
+
+define({id: "7c75f0ab", outputs: ["Plot","d3"], body: async () => {
+const [Plot, d3] = await Promise.all([import("./_npm/@observablehq/plot@0.6.17/d761ef9b.js"), import("./_npm/d3@7.9.0/e780feca.js")]);
+
+return {Plot,d3};
+}});
+
+define({id: "f2a31e66", inputs: ["d3"], outputs: ["normal1","normal2","skewed","allData"], body: (d3) => {
+// Generate sample data from different distributions
+const normal1 = d3.range(1000).map(() => d3.randomNormal(100, 15)());
+const normal2 = d3.range(1000).map(() => d3.randomNormal(110, 20)());
+const skewed = d3.range(1000).map(() => Math.pow(d3.randomUniform(0, 1)(), 2) * 200);
+
+const allData = [
+  ...normal1.map(v => ({value: v, group: "Control Group", type: "normal"})),
+  ...normal2.map(v => ({value: v, group: "Treatment Group", type: "normal"})),
+  ...skewed.map(v => ({value: v, group: "Skewed Sample", type: "skewed"}))
+];
+return {normal1,normal2,skewed,allData};
+}});
+
+define({id: "48987705", inputs: ["Plot","allData","display"], body: async (Plot,allData,display) => {
+display(await(
+Plot.plot({
+  title: "Distribution Comparison: Histogram with Density Curves",
+  subtitle: "Comparing control, treatment, and skewed distributions",
+  width: 800,
+  height: 400,
+  marginBottom: 50,
+  x: {label: "Value →"},
+  y: {label: "↑ Density"},
+  color: {legend: true},
+  marks: [
+    Plot.rectY(allData, Plot.binX({y: "proportion"}, {
+      x: "value",
+      fill: "group",
+      fillOpacity: 0.5,
+      thresholds: 30
+    })),
+    Plot.lineY(allData, Plot.binX({y: "proportion"}, {
+      x: "value",
+      stroke: "group",
+      strokeWidth: 2,
+      curve: "catmull-rom",
+      thresholds: 30
+    }))
+  ]
+})
+))
+}});
+
+define({id: "d7f13512", inputs: ["d3"], outputs: ["conditions","experimentData"], body: (d3) => {
+// Generate data for multiple experimental conditions
+const conditions = ["Baseline", "Low Dose", "Medium Dose", "High Dose", "Control"];
+const experimentData = [];
+
+conditions.forEach((condition, i) => {
+  const mean = 50 + i * 10;
+  const sd = 5 + i * 2;
+  const n = 100;
+  
+  for (let j = 0; j < n; j++) {
+    experimentData.push({
+      condition,
+      value: d3.randomNormal(mean, sd)(),
+      replicate: j % 10,
+      significant: i > 2
+    });
+  }
+});
+return {conditions,experimentData};
+}});
+
+define({id: "f647ffe6", inputs: ["Plot","experimentData","display"], body: async (Plot,experimentData,display) => {
+display(await(
+Plot.plot({
+  title: "Treatment Response by Dosage",
+  subtitle: "Box plots showing distribution of responses",
+  width: 700,
+  height: 400,
+  marginLeft: 100,
+  y: {grid: true, label: "Response Value"},
+  marks: [
+    Plot.boxY(experimentData, {
+      x: "condition",
+      y: "value",
+      fill: d => d.significant ? "orange" : "steelblue",
+      fillOpacity: 0.5
+    }),
+    Plot.dot(experimentData.filter(d => Math.random() < 0.1), {
+      x: "condition",
+      y: "value",
+      r: 2,
+      fill: "black",
+      fillOpacity: 0.3
+    })
+  ]
+})
+))
+}});
+
+define({id: "09fcbe46", inputs: ["d3"], outputs: ["n","correlatedData"], body: (d3) => {
+// Generate correlated variables
+const n = 200;
+const correlatedData = d3.range(n).map(() => {
+  const x1 = d3.randomNormal(0, 1)();
+  const x2 = x1 * 0.7 + d3.randomNormal(0, 1)() * 0.3;
+  const x3 = x1 * 0.3 + x2 * 0.5 + d3.randomNormal(0, 1)() * 0.4;
+  const y = x1 * 2 + x2 * 1.5 + x3 * 0.5 + d3.randomNormal(0, 1)();
+  
+  return {
+    "Variable A": x1,
+    "Variable B": x2,
+    "Variable C": x3,
+    "Outcome": y
+  };
+});
+return {n,correlatedData};
+}});
+
+define({id: "8b8561f3", inputs: ["correlatedData","d3"], outputs: ["x","y","xValues","yValues","xMean","yMean","num","den","slope","intercept","r2"], body: (correlatedData,d3) => {
+// Create scatter plot with regression line
+const x = "Variable A";
+const y = "Outcome";
+
+// Calculate regression
+const xValues = correlatedData.map(d => d[x]);
+const yValues = correlatedData.map(d => d[y]);
+const xMean = d3.mean(xValues);
+const yMean = d3.mean(yValues);
+
+const num = d3.sum(xValues.map((xi, i) => (xi - xMean) * (yValues[i] - yMean)));
+const den = d3.sum(xValues.map(xi => Math.pow(xi - xMean, 2)));
+const slope = num / den;
+const intercept = yMean - slope * xMean;
+const r2 = Math.pow(num / Math.sqrt(den * d3.sum(yValues.map(yi => Math.pow(yi - yMean, 2)))), 2);
+return {x,y,xValues,yValues,xMean,yMean,num,den,slope,intercept,r2};
+}});
+
+define({id: "61dcf584", inputs: ["Plot","x","y","r2","slope","intercept","correlatedData","xMean","d3","yValues","display"], body: async (Plot,x,y,r2,slope,intercept,correlatedData,xMean,d3,yValues,display) => {
+display(await(
+Plot.plot({
+  title: `Regression Analysis: ${x} vs ${y}`,
+  subtitle: `R² = ${r2.toFixed(3)}, y = ${slope.toFixed(2)}x + ${intercept.toFixed(2)}`,
+  width: 600,
+  height: 500,
+  grid: true,
+  marks: [
+    Plot.dot(correlatedData, {
+      x: x,
+      y: y,
+      fill: "steelblue",
+      fillOpacity: 0.5,
+      r: 3
+    }),
+    Plot.line(correlatedData, {
+      x: x,
+      y: d => slope * d[x] + intercept,
+      stroke: "red",
+      strokeWidth: 2
+    }),
+    Plot.text([`R² = ${r2.toFixed(3)}`], {
+      x: xMean,
+      y: d3.max(yValues) * 0.9,
+      fill: "red",
+      fontSize: 14
+    })
+  ]
+})
+))
+}});
+
+define({id: "14112f97", inputs: ["d3"], outputs: ["group1","group2","mean1","mean2","var1","var2","n1","n2","pooledSE","tStat","df","pValue","testResult","jStat_studentt_cdf","jStat"], body: (d3) => {
+// Simulate t-test scenario
+const group1 = d3.range(50).map(() => d3.randomNormal(100, 15)());
+const group2 = d3.range(50).map(() => d3.randomNormal(108, 15)());
+
+// Calculate t-statistic
+const mean1 = d3.mean(group1);
+const mean2 = d3.mean(group2);
+const var1 = d3.variance(group1);
+const var2 = d3.variance(group2);
+const n1 = group1.length;
+const n2 = group2.length;
+
+const pooledSE = Math.sqrt(var1/n1 + var2/n2);
+const tStat = (mean2 - mean1) / pooledSE;
+const df = n1 + n2 - 2;
+const pValue = 2 * (1 - jStat.studentt.cdf(Math.abs(tStat), df)); // Approximation
+
+const testResult = {
+  "Group 1 Mean": mean1.toFixed(2),
+  "Group 2 Mean": mean2.toFixed(2),
+  "Difference": (mean2 - mean1).toFixed(2),
+  "t-statistic": tStat.toFixed(3),
+  "p-value": pValue < 0.001 ? "< 0.001" : pValue.toFixed(4),
+  "Significant": pValue < 0.05 ? "Yes" : "No"
+};
+
+// Approximate p-value calculation (simplified)
+function jStat_studentt_cdf(t, df) {
+  // Simplified approximation for demonstration
+  return 0.5 + 0.5 * (t / Math.sqrt(t * t + df));
+}
+const jStat = {studentt: {cdf: jStat_studentt_cdf}};
+return {group1,group2,mean1,mean2,var1,var2,n1,n2,pooledSE,tStat,df,pValue,testResult,jStat_studentt_cdf,jStat};
+}});
+
+define({id: "ec78dd7e", inputs: ["Inputs","testResult","display"], body: async (Inputs,testResult,display) => {
+display(await(
+Inputs.table([testResult], {
+  columns: Object.keys(testResult)
+})
+))
+}});
+
+define({id: "5dfb4b28", inputs: ["Plot","pValue","group1","group2","mean1","mean2","display"], body: async (Plot,pValue,group1,group2,mean1,mean2,display) => {
+display(await(
+Plot.plot({
+  title: "Two-Sample t-Test: Group Comparison",
+  subtitle: `p-value ${pValue < 0.05 ? "< 0.05 (Significant)" : "> 0.05 (Not Significant)"}`,
+  width: 600,
+  height: 400,
+  y: {grid: true, label: "Value"},
+  marks: [
+    Plot.boxY([...group1.map(v => ({group: "Group 1", value: v})),
+               ...group2.map(v => ({group: "Group 2", value: v}))], {
+      x: "group",
+      y: "value",
+      fill: d => d.group === "Group 1" ? "steelblue" : "orange",
+      fillOpacity: 0.5
+    }),
+    Plot.ruleY([mean1], {stroke: "steelblue", strokeWidth: 2, strokeDasharray: "5,5"}),
+    Plot.ruleY([mean2], {stroke: "orange", strokeWidth: 2, strokeDasharray: "5,5"})
+  ]
+})
+))
+}});
+
+define({id: "429e3d47", inputs: ["d3"], outputs: ["originalSample","bootstrapMeans","sampleMean","ci95Lower","ci95Upper"], body: (d3) => {
+// Generate bootstrap samples for confidence interval
+const originalSample = d3.range(30).map(() => d3.randomNormal(100, 20)());
+const bootstrapMeans = d3.range(1000).map(() => {
+  const resample = d3.range(originalSample.length).map(() => 
+    originalSample[Math.floor(Math.random() * originalSample.length)]
+  );
+  return d3.mean(resample);
+});
+
+const sampleMean = d3.mean(originalSample);
+const ci95Lower = d3.quantile(bootstrapMeans.sort(d3.ascending), 0.025);
+const ci95Upper = d3.quantile(bootstrapMeans.sort(d3.ascending), 0.975);
+return {originalSample,bootstrapMeans,sampleMean,ci95Lower,ci95Upper};
+}});
+
+define({id: "2e1f53c0", inputs: ["Plot","ci95Lower","ci95Upper","bootstrapMeans","sampleMean","display"], body: async (Plot,ci95Lower,ci95Upper,bootstrapMeans,sampleMean,display) => {
+display(await(
+Plot.plot({
+  title: "Bootstrap Confidence Interval",
+  subtitle: `95% CI: [${ci95Lower.toFixed(2)}, ${ci95Upper.toFixed(2)}]`,
+  width: 700,
+  height: 400,
+  x: {label: "Sample Mean"},
+  y: {label: "Frequency"},
+  marks: [
+    Plot.rectY(bootstrapMeans, Plot.binX({y: "count"}, {
+      x: d => d,
+      fill: "steelblue",
+      fillOpacity: 0.7
+    })),
+    Plot.ruleX([sampleMean], {stroke: "red", strokeWidth: 2}),
+    Plot.ruleX([ci95Lower, ci95Upper], {stroke: "orange", strokeWidth: 2, strokeDasharray: "5,5"}),
+    Plot.text([`Mean: ${sampleMean.toFixed(2)}`], {
+      x: sampleMean,
+      y: 100,
+      dy: -10,
+      fill: "red"
+    })
+  ]
+})
+))
+}});
+
+define({id: "09718eba", inputs: ["mean2","mean1","var1","var2"], outputs: ["cohensD","effectSize","effectData"], body: (mean2,mean1,var1,var2) => {
+// Calculate Cohen's d
+const cohensD = (mean2 - mean1) / Math.sqrt((var1 + var2) / 2);
+const effectSize = Math.abs(cohensD) < 0.2 ? "Small" : 
+                   Math.abs(cohensD) < 0.5 ? "Medium" :
+                   Math.abs(cohensD) < 0.8 ? "Large" : "Very Large";
+
+const effectData = [
+  {measure: "Mean Difference", value: mean2 - mean1},
+  {measure: "Pooled SD", value: Math.sqrt((var1 + var2) / 2)},
+  {measure: "Cohen's d", value: cohensD},
+  {measure: "Effect Size", value: effectSize}
+];
+return {cohensD,effectSize,effectData};
+}});
+
+define({id: "f2b0ef86", inputs: ["Plot","cohensD","effectSize","d3","display"], body: async (Plot,cohensD,effectSize,d3,display) => {
+display(await(
+Plot.plot({
+  title: "Effect Size Visualization",
+  subtitle: `Cohen's d = ${cohensD.toFixed(3)} (${effectSize} effect)`,
+  width: 600,
+  height: 300,
+  x: {domain: [-3, 3], label: "Standardized Effect →"},
+  y: {label: "↑ Probability Density"},
+  marks: [
+    // Control distribution
+    Plot.areaY(d3.range(-3, 3, 0.01).map(x => ({
+      x: x,
+      y: Math.exp(-0.5 * x * x) / Math.sqrt(2 * Math.PI),
+      group: "Control"
+    })), {x: "x", y: "y", fill: "steelblue", fillOpacity: 0.3}),
+    // Treatment distribution
+    Plot.areaY(d3.range(-3, 3, 0.01).map(x => ({
+      x: x,
+      y: Math.exp(-0.5 * Math.pow(x - cohensD, 2)) / Math.sqrt(2 * Math.PI),
+      group: "Treatment"
+    })), {x: "x", y: "y", fill: "orange", fillOpacity: 0.3}),
+    Plot.ruleX([0], {stroke: "steelblue", strokeWidth: 2}),
+    Plot.ruleX([cohensD], {stroke: "orange", strokeWidth: 2}),
+    Plot.arrow([{x1: 0, x2: cohensD, y: 0.2}], {
+      x1: "x1",
+      x2: "x2", 
+      y: "y",
+      stroke: "red",
+      strokeWidth: 2
+    })
+  ]
+})
+))
+}});
+
+define({id: "d4b53963", inputs: ["d3"], outputs: ["groups","anovaData","groupMeans","overallMean"], body: (d3) => {
+// Generate data for multiple groups
+const groups = ["Control", "Treatment A", "Treatment B", "Treatment C", "Combined"];
+const anovaData = [];
+
+groups.forEach((group, i) => {
+  const mean = 100 + i * 5 + (i === 4 ? 10 : 0); // Combined has extra effect
+  const n = 40;
+  for (let j = 0; j < n; j++) {
+    anovaData.push({
+      group: group,
+      value: d3.randomNormal(mean, 10)(),
+      significant: i === 4
+    });
+  }
+});
+
+// Calculate group means and overall mean
+const groupMeans = d3.rollup(anovaData, v => d3.mean(v, d => d.value), d => d.group);
+const overallMean = d3.mean(anovaData, d => d.value);
+return {groups,anovaData,groupMeans,overallMean};
+}});
+
+define({id: "80fcc8d8", inputs: ["Plot","anovaData","overallMean","groupMeans","display"], body: async (Plot,anovaData,overallMean,groupMeans,display) => {
+display(await(
+Plot.plot({
+  title: "Multiple Group Comparison (ANOVA)",
+  subtitle: "Comparing treatment effects across groups",
+  width: 800,
+  height: 500,
+  marginBottom: 60,
+  y: {grid: true, label: "Response Variable"},
+  marks: [
+    Plot.dot(anovaData, {
+      x: "group",
+      y: "value",
+      fill: d => d.significant ? "red" : "steelblue",
+      fillOpacity: 0.3,
+      r: 2
+    }),
+    Plot.crosshair(anovaData, {
+      x: "group",
+      y: "value"
+    }),
+    Plot.ruleY([overallMean], {
+      stroke: "black",
+      strokeWidth: 2,
+      strokeDasharray: "10,5"
+    }),
+    Plot.text([`Overall Mean: ${overallMean.toFixed(1)}`], {
+      x: "Treatment B",
+      y: overallMean,
+      dy: -10,
+      fontSize: 12
+    }),
+    Plot.dot(Array.from(groupMeans, ([group, mean]) => ({group, mean})), {
+      x: "group",
+      y: "mean",
+      r: 5,
+      fill: "red",
+      stroke: "white",
+      strokeWidth: 2
+    })
+  ]
+})
+))
+}});
+
+define({id: "8502cf09", inputs: ["groups","anovaData","d3"], outputs: ["summaryStats"], body: (groups,anovaData,d3) => {
+const summaryStats = groups.map(group => {
+  const groupData = anovaData.filter(d => d.group === group).map(d => d.value);
+  return {
+    Group: group,
+    N: groupData.length,
+    Mean: d3.mean(groupData).toFixed(2),
+    SD: d3.deviation(groupData).toFixed(2),
+    Min: d3.min(groupData).toFixed(2),
+    Q1: d3.quantile(groupData, 0.25).toFixed(2),
+    Median: d3.median(groupData).toFixed(2),
+    Q3: d3.quantile(groupData, 0.75).toFixed(2),
+    Max: d3.max(groupData).toFixed(2)
+  };
+});
+return {summaryStats};
+}});
+
+define({id: "00ea6044", inputs: ["Inputs","summaryStats","display"], body: async (Inputs,summaryStats,display) => {
+display(await(
+Inputs.table(summaryStats, {
+  columns: ["Group", "N", "Mean", "SD", "Min", "Q1", "Median", "Q3", "Max"]
+})
+))
+}});
+
+</script>
+</head>
+<body>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link"><a href="./">Research Report Publishing Platform</a></li>
+  </ol>
+  <ol>
+    <li class="observablehq-link"><a href="./">Home</a></li>
+  </ol>
+  <section class="observablehq-section-active">
+    <summary>Data Visualization</summary>
+    <ol>
+    <li class="observablehq-link observablehq-link-active"><a href="./statistical-analysis">Statistical Analysis</a></li>
+    <li class="observablehq-link"><a href="./time-series">Time Series</a></li>
+    <li class="observablehq-link"><a href="./geospatial">Geospatial Data</a></li>
+    <li class="observablehq-link"><a href="./network-analysis">Network Analysis</a></li>
+    </ol>
+  </section>
+  <section>
+    <summary>Reports &amp; Tables</summary>
+    <ol>
+    <li class="observablehq-link"><a href="./data-tables">Data Tables</a></li>
+    <li class="observablehq-link"><a href="./methods">Methods &amp; References</a></li>
+    </ol>
+  </section>
+</nav>
+<script>{const e=document.querySelector("#observablehq-sidebar"),o=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?o.checked=r==="true":o.indeterminate=!0;for(const t of document.querySelectorAll("#observablehq-sidebar summary")){const s=t.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${t.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<div id="observablehq-center">
+<aside id="observablehq-toc" data-selector="h1:not(:first-of-type)[id], h2:first-child[id], :not(h1) + h2[id]">
+<nav>
+<div>Contents</div>
+<ol>
+<li class="observablehq-secondary-link"><a href="#distribution-analysis">Distribution Analysis</a></li>
+<li class="observablehq-secondary-link"><a href="#correlation-and-regression">Correlation and Regression</a></li>
+<li class="observablehq-secondary-link"><a href="#hypothesis-testing">Hypothesis Testing</a></li>
+<li class="observablehq-secondary-link"><a href="#confidence-intervals">Confidence Intervals</a></li>
+<li class="observablehq-secondary-link"><a href="#effect-sizes-and-power-analysis">Effect Sizes and Power Analysis</a></li>
+<li class="observablehq-secondary-link"><a href="#multiple-comparisons">Multiple Comparisons</a></li>
+<li class="observablehq-secondary-link"><a href="#summary-statistics-table">Summary Statistics Table</a></li>
+<li class="observablehq-secondary-link"><a href="#statistical-methods-notes">Statistical Methods Notes</a></li>
+</ol>
+</nav>
+</aside>
+<main id="observablehq-main" class="observablehq">
+<h1 id="statistical-analysis" tabindex="-1"><a class="observablehq-header-anchor" href="#statistical-analysis">Statistical Analysis</a></h1>
+<p>This page demonstrates various statistical visualization techniques commonly used in academic research. All visualizations are interactive and can be exported to PDF with professional formatting<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>.</p>
+<div class="observablehq observablehq--block"><!--:7c75f0ab:--></div>
+<h2 id="distribution-analysis" tabindex="-1"><a class="observablehq-header-anchor" href="#distribution-analysis">Distribution Analysis</a></h2>
+<p>Understanding data distributions is fundamental to statistical analysis. Below we explore various ways to visualize and analyze distributions<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>.</p>
+<h3 id="normal-distribution-comparison" tabindex="-1"><a class="observablehq-header-anchor" href="#normal-distribution-comparison">Normal Distribution Comparison</a></h3>
+<div class="observablehq observablehq--block"><!--:f2a31e66:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:48987705:--></div>
+<h3 id="box-plots-and-violin-plots" tabindex="-1"><a class="observablehq-header-anchor" href="#box-plots-and-violin-plots">Box Plots and Violin Plots</a></h3>
+<p>Box plots provide a concise summary of distributions, showing median, quartiles, and outliers<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup>.</p>
+<div class="observablehq observablehq--block"><!--:d7f13512:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:f647ffe6:--></div>
+<h2 id="correlation-and-regression" tabindex="-1"><a class="observablehq-header-anchor" href="#correlation-and-regression">Correlation and Regression</a></h2>
+<h3 id="scatter-plot-matrix" tabindex="-1"><a class="observablehq-header-anchor" href="#scatter-plot-matrix">Scatter Plot Matrix</a></h3>
+<p>Exploring relationships between multiple variables simultaneously<sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup>.</p>
+<div class="observablehq observablehq--block"><!--:09fcbe46:--></div>
+<div class="observablehq observablehq--block"><!--:8b8561f3:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:61dcf584:--></div>
+<h2 id="hypothesis-testing" tabindex="-1"><a class="observablehq-header-anchor" href="#hypothesis-testing">Hypothesis Testing</a></h2>
+<h3 id="t-test-visualization" tabindex="-1"><a class="observablehq-header-anchor" href="#t-test-visualization">t-Test Visualization</a></h3>
+<p>Visualizing the results of statistical tests helps communicate significance<sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup>.</p>
+<div class="observablehq observablehq--block"><!--:14112f97:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:ec78dd7e:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:5dfb4b28:--></div>
+<h2 id="confidence-intervals" tabindex="-1"><a class="observablehq-header-anchor" href="#confidence-intervals">Confidence Intervals</a></h2>
+<h3 id="parameter-estimation-with-confidence-intervals" tabindex="-1"><a class="observablehq-header-anchor" href="#parameter-estimation-with-confidence-intervals">Parameter Estimation with Confidence Intervals</a></h3>
+<div class="observablehq observablehq--block"><!--:429e3d47:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:2e1f53c0:--></div>
+<h2 id="effect-sizes-and-power-analysis" tabindex="-1"><a class="observablehq-header-anchor" href="#effect-sizes-and-power-analysis">Effect Sizes and Power Analysis</a></h2>
+<h3 id="cohens-d-effect-size" tabindex="-1"><a class="observablehq-header-anchor" href="#cohens-d-effect-size">Cohen's d Effect Size</a></h3>
+<div class="observablehq observablehq--block"><!--:09718eba:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:f2b0ef86:--></div>
+<h2 id="multiple-comparisons" tabindex="-1"><a class="observablehq-header-anchor" href="#multiple-comparisons">Multiple Comparisons</a></h2>
+<h3 id="anova-style-visualization" tabindex="-1"><a class="observablehq-header-anchor" href="#anova-style-visualization">ANOVA-style Visualization</a></h3>
+<div class="observablehq observablehq--block"><!--:d4b53963:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:80fcc8d8:--></div>
+<h2 id="summary-statistics-table" tabindex="-1"><a class="observablehq-header-anchor" href="#summary-statistics-table">Summary Statistics Table</a></h2>
+<div class="observablehq observablehq--block"><!--:8502cf09:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:00ea6044:--></div>
+<h2 id="statistical-methods-notes" tabindex="-1"><a class="observablehq-header-anchor" href="#statistical-methods-notes">Statistical Methods Notes</a></h2>
+<p>The visualizations on this page demonstrate fundamental statistical concepts used in research<sup class="footnote-ref"><a href="#fn6" id="fnref6">[6]</a></sup>. Each plot is designed to be both informative and publication-ready.</p>
+<h3 id="key-takeaways" tabindex="-1"><a class="observablehq-header-anchor" href="#key-takeaways">Key Takeaways</a></h3>
+<ol>
+<li><strong>Distribution Analysis</strong>: Always examine your data's distribution before choosing statistical tests</li>
+<li><strong>Effect Sizes</strong>: Report effect sizes alongside p-values for practical significance</li>
+<li><strong>Confidence Intervals</strong>: Provide more information than p-values alone</li>
+<li><strong>Multiple Comparisons</strong>: Adjust for multiple testing to avoid false positives</li>
+<li><strong>Visualization</strong>: Good statistical graphics can reveal patterns that summary statistics miss</li>
+</ol>
+<hr>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>All statistical visualizations use D3.js and Observable Plot for rendering. The underlying calculations follow standard statistical formulas as described in Cohen (1988) and Tukey (1977). <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>Distribution analysis forms the foundation of statistical inference. Normal distributions are assumed by many parametric tests, making distribution checking a critical first step. See Shapiro-Wilk test for formal normality testing. <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p>Box plots were popularized by John Tukey in his 1977 book "Exploratory Data Analysis". They efficiently display the five-number summary: minimum, Q1, median, Q3, and maximum, plus outliers. <a href="#fnref3" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn4" class="footnote-item"><p>Correlation does not imply causation. The correlation coefficient r measures linear association strength, ranging from -1 to +1. The coefficient of determination R² represents the proportion of variance explained. <a href="#fnref4" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn5" class="footnote-item"><p>The t-test, developed by William Sealy Gosset under the pseudonym "Student", compares means between two groups. It assumes normal distributions and equal variances (for the standard version). <a href="#fnref5" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn6" class="footnote-item"><p>For comprehensive statistical methodology, see: Wasserman, L. (2004). "All of Statistics: A Concise Course in Statistical Inference". Springer. ISBN: 978-0-387-40272-7. <a href="#fnref6" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+</main>
+<footer id="observablehq-footer">
+<nav><a rel="prev" href="./"><span>Research Report Publishing Platform</span></a><a rel="next" href="./time-series"><span>Time Series</span></a></nav>
+<div>Built with Observable Framework on Aug 11, 2025.</div>
+</footer>
+</div>
+</body>
+</html>

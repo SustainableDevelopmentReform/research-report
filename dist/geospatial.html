@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="generator" content="Observable Framework v1.13.3">
+<title>Geospatial Data Visualization | Research Report Publishing Platform</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-air,near-midnight.dcdbf18e.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-air,near-midnight.dcdbf18e.css">
+<link rel="modulepreload" href="./_observablehq/client.5446bbef.js">
+<link rel="modulepreload" href="./_observablehq/runtime.e080113b.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.24b62b2e.js">
+<link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.17/d761ef9b.js">
+<link rel="modulepreload" href="./_npm/d3@7.9.0/e780feca.js">
+<link rel="modulepreload" href="./_npm/topojson-client@3.1.0/edd9ee95.js">
+<link rel="modulepreload" href="./_npm/isoformat@0.2.1/18cbf477.js">
+<link rel="modulepreload" href="./_npm/interval-tree-1d@1.0.4/53fe8176.js">
+<link rel="modulepreload" href="./_npm/d3-array@3.2.4/e93ca09f.js">
+<link rel="modulepreload" href="./_npm/d3-axis@3.0.0/0f2de24d.js">
+<link rel="modulepreload" href="./_npm/d3-brush@3.0.0/65eb105b.js">
+<link rel="modulepreload" href="./_npm/d3-chord@3.0.1/7ef8fb2e.js">
+<link rel="modulepreload" href="./_npm/d3-color@3.1.0/aeb57b94.js">
+<link rel="modulepreload" href="./_npm/d3-contour@4.0.2/1d2aed74.js">
+<link rel="modulepreload" href="./_npm/d3-delaunay@6.0.4/5ced1d52.js">
+<link rel="modulepreload" href="./_npm/d3-dispatch@3.0.1/9ba9c7f3.js">
+<link rel="modulepreload" href="./_npm/d3-drag@3.0.0/4202580c.js">
+<link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/9cffc2bd.js">
+<link rel="modulepreload" href="./_npm/d3-ease@3.0.1/cdd7e898.js">
+<link rel="modulepreload" href="./_npm/d3-fetch@3.0.1/b4e2ad9a.js">
+<link rel="modulepreload" href="./_npm/d3-force@3.0.0/5e804d15.js">
+<link rel="modulepreload" href="./_npm/d3-format@3.1.0/86074ef6.js">
+<link rel="modulepreload" href="./_npm/d3-geo@3.1.1/40599fb3.js">
+<link rel="modulepreload" href="./_npm/d3-hierarchy@3.1.2/e49e792c.js">
+<link rel="modulepreload" href="./_npm/d3-interpolate@3.0.1/8d1e5425.js">
+<link rel="modulepreload" href="./_npm/d3-path@3.1.0/20d3f133.js">
+<link rel="modulepreload" href="./_npm/d3-polygon@3.0.1/7553081f.js">
+<link rel="modulepreload" href="./_npm/d3-quadtree@3.0.1/0dfd751c.js">
+<link rel="modulepreload" href="./_npm/d3-random@3.0.1/3c90ee06.js">
+<link rel="modulepreload" href="./_npm/d3-scale@4.0.2/843b6a76.js">
+<link rel="modulepreload" href="./_npm/d3-scale-chromatic@3.1.0/ba24c2e7.js">
+<link rel="modulepreload" href="./_npm/d3-selection@3.0.0/4d94e5b7.js">
+<link rel="modulepreload" href="./_npm/d3-shape@3.2.0/6d3a6726.js">
+<link rel="modulepreload" href="./_npm/d3-time@3.1.0/9f03c579.js">
+<link rel="modulepreload" href="./_npm/d3-time-format@4.1.0/07c9626f.js">
+<link rel="modulepreload" href="./_npm/d3-timer@3.0.1/b58a267d.js">
+<link rel="modulepreload" href="./_npm/d3-transition@3.0.1/004da2ac.js">
+<link rel="modulepreload" href="./_npm/d3-zoom@3.0.0/b5786b3f.js">
+<link rel="modulepreload" href="./_npm/binary-search-bounds@2.0.5/cbf6ba23.js">
+<link rel="modulepreload" href="./_npm/internmap@2.0.3/e08981d9.js">
+<link rel="modulepreload" href="./_npm/delaunator@5.0.1/02d43215.js">
+<link rel="modulepreload" href="./_npm/robust-predicates@3.0.2/aa00730b.js">
+<link rel="icon" href="./_file/observable.1af93621.png" type="image/png" sizes="32x32">
+<script type="module">
+
+import {define} from "./_observablehq/client.5446bbef.js";
+
+define({id: "e92ea15d", outputs: ["Plot","d3","topojson"], body: async () => {
+const [Plot, d3, topojson] = await Promise.all([import("./_npm/@observablehq/plot@0.6.17/d761ef9b.js"), import("./_npm/d3@7.9.0/e780feca.js"), import("./_npm/topojson-client@3.1.0/edd9ee95.js")]);
+
+return {Plot,d3,topojson};
+}});
+
+define({id: "0a3656f4", outputs: ["stateData"], body: () => {
+// Generate sample data for US states
+const stateData = [
+  {state: "California", value: 85, population: 39538223},
+  {state: "Texas", value: 72, population: 29145505},
+  {state: "Florida", value: 68, population: 21538187},
+  {state: "New York", value: 78, population: 20201249},
+  {state: "Pennsylvania", value: 65, population: 13002700},
+  {state: "Illinois", value: 70, population: 12812508},
+  {state: "Ohio", value: 62, population: 11799448},
+  {state: "Georgia", value: 66, population: 10711908},
+  {state: "North Carolina", value: 64, population: 10439388},
+  {state: "Michigan", value: 61, population: 10077331}
+];
+return {stateData};
+}});
+
+define({id: "a3e77a7c", inputs: ["Plot","stateData","display"], body: async (Plot,stateData,display) => {
+display(await(
+Plot.plot({
+  title: "Research Output by State",
+  subtitle: "Top 10 states by population",
+  width: 800,
+  height: 400,
+  marginLeft: 120,
+  x: {label: "Research Index →"},
+  marks: [
+    Plot.barX(stateData.sort((a, b) => b.value - a.value), {
+      y: "state",
+      x: "value",
+      fill: "value",
+      tip: true
+    })
+  ]
+})
+))
+}});
+
+define({id: "d0ee531e", inputs: ["d3"], outputs: ["clusters","pointsPerCluster","mapPoints"], body: (d3) => {
+// Generate clustered point data
+const clusters = 5;
+const pointsPerCluster = 50;
+const mapPoints = [];
+
+for (let c = 0; c < clusters; c++) {
+  const centerLat = 25 + Math.random() * 25;
+  const centerLon = -125 + Math.random() * 50;
+  
+  for (let p = 0; p < pointsPerCluster; p++) {
+    mapPoints.push({
+      lat: centerLat + d3.randomNormal(0, 2)(),
+      lon: centerLon + d3.randomNormal(0, 2)(),
+      cluster: `Cluster ${c + 1}`,
+      value: Math.random() * 100
+    });
+  }
+}
+return {clusters,pointsPerCluster,mapPoints};
+}});
+
+define({id: "394e99fc", inputs: ["Plot","mapPoints","display"], body: async (Plot,mapPoints,display) => {
+display(await(
+Plot.plot({
+  title: "Research Site Locations",
+  subtitle: "Clustered sampling sites across regions",
+  width: 800,
+  height: 500,
+  projection: {
+    type: "albers-usa",
+    domain: {type: "Sphere"}
+  },
+  marks: [
+    Plot.dot(mapPoints, {
+      x: "lon",
+      y: "lat", 
+      r: d => Math.sqrt(d.value),
+      fill: "cluster",
+      fillOpacity: 0.6,
+      tip: true
+    })
+  ]
+})
+))
+}});
+
+define({id: "f2693ca2", inputs: ["Plot","mapPoints","display"], body: async (Plot,mapPoints,display) => {
+display(await(
+Plot.plot({
+  title: "Research Activity Density",
+  subtitle: "Kernel density estimation of point data",
+  width: 800,
+  height: 500,
+  color: {scheme: "YlOrRd"},
+  marks: [
+    Plot.density(mapPoints, {
+      x: "lon",
+      y: "lat",
+      fill: "density",
+      bandwidth: 20,
+      thresholds: 30
+    }),
+    Plot.dot(mapPoints, {
+      x: "lon",
+      y: "lat",
+      r: 1,
+      fill: "black",
+      fillOpacity: 0.3
+    })
+  ]
+})
+))
+}});
+
+</script>
+</head>
+<body>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link"><a href="./">Research Report Publishing Platform</a></li>
+  </ol>
+  <ol>
+    <li class="observablehq-link"><a href="./">Home</a></li>
+  </ol>
+  <section class="observablehq-section-active">
+    <summary>Data Visualization</summary>
+    <ol>
+    <li class="observablehq-link"><a href="./statistical-analysis">Statistical Analysis</a></li>
+    <li class="observablehq-link"><a href="./time-series">Time Series</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./geospatial">Geospatial Data</a></li>
+    <li class="observablehq-link"><a href="./network-analysis">Network Analysis</a></li>
+    </ol>
+  </section>
+  <section>
+    <summary>Reports &amp; Tables</summary>
+    <ol>
+    <li class="observablehq-link"><a href="./data-tables">Data Tables</a></li>
+    <li class="observablehq-link"><a href="./methods">Methods &amp; References</a></li>
+    </ol>
+  </section>
+</nav>
+<script>{const e=document.querySelector("#observablehq-sidebar"),o=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?o.checked=r==="true":o.indeterminate=!0;for(const t of document.querySelectorAll("#observablehq-sidebar summary")){const s=t.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${t.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<div id="observablehq-center">
+<aside id="observablehq-toc" data-selector="h1:not(:first-of-type)[id], h2:first-child[id], :not(h1) + h2[id]">
+<nav>
+<div>Contents</div>
+<ol>
+<li class="observablehq-secondary-link"><a href="#choropleth-maps">Choropleth Maps</a></li>
+<li class="observablehq-secondary-link"><a href="#point-clustering">Point Clustering</a></li>
+<li class="observablehq-secondary-link"><a href="#density-heatmaps">Density Heatmaps</a></li>
+<li class="observablehq-secondary-link"><a href="#geographic-patterns">Geographic Patterns</a></li>
+</ol>
+</nav>
+</aside>
+<main id="observablehq-main" class="observablehq">
+<h1 id="geospatial-data-visualization" tabindex="-1"><a class="observablehq-header-anchor" href="#geospatial-data-visualization">Geospatial Data Visualization</a></h1>
+<p>Geographic data visualization is essential for spatial analysis in research<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>. This page demonstrates mapping capabilities using Observable Framework.</p>
+<div class="observablehq observablehq--block"><!--:e92ea15d:--></div>
+<h2 id="choropleth-maps" tabindex="-1"><a class="observablehq-header-anchor" href="#choropleth-maps">Choropleth Maps</a></h2>
+<div class="observablehq observablehq--block"><!--:0a3656f4:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:a3e77a7c:--></div>
+<h2 id="point-clustering" tabindex="-1"><a class="observablehq-header-anchor" href="#point-clustering">Point Clustering</a></h2>
+<div class="observablehq observablehq--block"><!--:d0ee531e:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:394e99fc:--></div>
+<h2 id="density-heatmaps" tabindex="-1"><a class="observablehq-header-anchor" href="#density-heatmaps">Density Heatmaps</a></h2>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:f2693ca2:--></div>
+<h2 id="geographic-patterns" tabindex="-1"><a class="observablehq-header-anchor" href="#geographic-patterns">Geographic Patterns</a></h2>
+<p>Spatial analysis reveals patterns that might be hidden in non-geographic representations<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>. Key applications include:</p>
+<ul>
+<li><strong>Environmental Science</strong>: Climate zones, pollution dispersion</li>
+<li><strong>Public Health</strong>: Disease spread, healthcare accessibility</li>
+<li><strong>Economics</strong>: Regional development, trade flows</li>
+<li><strong>Urban Planning</strong>: Population density, infrastructure planning</li>
+</ul>
+<hr>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>Geospatial visualization combines cartography with data visualization. See Tufte, E.R. (1983). The Visual Display of Quantitative Information for foundational principles. <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>Spatial autocorrelation and clustering analysis are fundamental to geographic data science. Anselin, L. (1995). Local indicators of spatial association—LISA. Geographical Analysis, 27(2), 93-115. <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+</main>
+<footer id="observablehq-footer">
+<nav><a rel="prev" href="./time-series"><span>Time Series</span></a><a rel="next" href="./network-analysis"><span>Network Analysis</span></a></nav>
+<div>Built with Observable Framework on Aug 11, 2025.</div>
+</footer>
+</div>
+</body>
+</html>

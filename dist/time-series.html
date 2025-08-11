@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="generator" content="Observable Framework v1.13.3">
+<title>Time Series Analysis | Research Report Publishing Platform</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="preload" as="style" href="./_observablehq/theme-air,near-midnight.dcdbf18e.css">
+<link rel="preload" as="style" href="./_observablehq/stdlib/inputs.ea9fd553.css">
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&amp;display=swap" crossorigin>
+<link rel="stylesheet" type="text/css" href="./_observablehq/theme-air,near-midnight.dcdbf18e.css">
+<link rel="stylesheet" type="text/css" href="./_observablehq/stdlib/inputs.ea9fd553.css">
+<link rel="modulepreload" href="./_observablehq/client.5446bbef.js">
+<link rel="modulepreload" href="./_observablehq/runtime.e080113b.js">
+<link rel="modulepreload" href="./_observablehq/stdlib.24b62b2e.js">
+<link rel="modulepreload" href="./_npm/@observablehq/plot@0.6.17/d761ef9b.js">
+<link rel="modulepreload" href="./_npm/d3@7.9.0/e780feca.js">
+<link rel="modulepreload" href="./_import/components/timeline.a41f0a1d.js">
+<link rel="modulepreload" href="./_observablehq/stdlib/inputs.b5a86791.js">
+<link rel="modulepreload" href="./_npm/htl@0.3.1/72f4716c.js">
+<link rel="modulepreload" href="./_npm/isoformat@0.2.1/18cbf477.js">
+<link rel="modulepreload" href="./_npm/interval-tree-1d@1.0.4/53fe8176.js">
+<link rel="modulepreload" href="./_npm/d3-array@3.2.4/e93ca09f.js">
+<link rel="modulepreload" href="./_npm/d3-axis@3.0.0/0f2de24d.js">
+<link rel="modulepreload" href="./_npm/d3-brush@3.0.0/65eb105b.js">
+<link rel="modulepreload" href="./_npm/d3-chord@3.0.1/7ef8fb2e.js">
+<link rel="modulepreload" href="./_npm/d3-color@3.1.0/aeb57b94.js">
+<link rel="modulepreload" href="./_npm/d3-contour@4.0.2/1d2aed74.js">
+<link rel="modulepreload" href="./_npm/d3-delaunay@6.0.4/5ced1d52.js">
+<link rel="modulepreload" href="./_npm/d3-dispatch@3.0.1/9ba9c7f3.js">
+<link rel="modulepreload" href="./_npm/d3-drag@3.0.0/4202580c.js">
+<link rel="modulepreload" href="./_npm/d3-dsv@3.0.1/9cffc2bd.js">
+<link rel="modulepreload" href="./_npm/d3-ease@3.0.1/cdd7e898.js">
+<link rel="modulepreload" href="./_npm/d3-fetch@3.0.1/b4e2ad9a.js">
+<link rel="modulepreload" href="./_npm/d3-force@3.0.0/5e804d15.js">
+<link rel="modulepreload" href="./_npm/d3-format@3.1.0/86074ef6.js">
+<link rel="modulepreload" href="./_npm/d3-geo@3.1.1/40599fb3.js">
+<link rel="modulepreload" href="./_npm/d3-hierarchy@3.1.2/e49e792c.js">
+<link rel="modulepreload" href="./_npm/d3-interpolate@3.0.1/8d1e5425.js">
+<link rel="modulepreload" href="./_npm/d3-path@3.1.0/20d3f133.js">
+<link rel="modulepreload" href="./_npm/d3-polygon@3.0.1/7553081f.js">
+<link rel="modulepreload" href="./_npm/d3-quadtree@3.0.1/0dfd751c.js">
+<link rel="modulepreload" href="./_npm/d3-random@3.0.1/3c90ee06.js">
+<link rel="modulepreload" href="./_npm/d3-scale@4.0.2/843b6a76.js">
+<link rel="modulepreload" href="./_npm/d3-scale-chromatic@3.1.0/ba24c2e7.js">
+<link rel="modulepreload" href="./_npm/d3-selection@3.0.0/4d94e5b7.js">
+<link rel="modulepreload" href="./_npm/d3-shape@3.2.0/6d3a6726.js">
+<link rel="modulepreload" href="./_npm/d3-time@3.1.0/9f03c579.js">
+<link rel="modulepreload" href="./_npm/d3-time-format@4.1.0/07c9626f.js">
+<link rel="modulepreload" href="./_npm/d3-timer@3.0.1/b58a267d.js">
+<link rel="modulepreload" href="./_npm/d3-transition@3.0.1/004da2ac.js">
+<link rel="modulepreload" href="./_npm/d3-zoom@3.0.0/b5786b3f.js">
+<link rel="modulepreload" href="./_npm/binary-search-bounds@2.0.5/cbf6ba23.js">
+<link rel="modulepreload" href="./_npm/internmap@2.0.3/e08981d9.js">
+<link rel="modulepreload" href="./_npm/delaunator@5.0.1/02d43215.js">
+<link rel="modulepreload" href="./_npm/robust-predicates@3.0.2/aa00730b.js">
+<link rel="icon" href="./_file/observable.1af93621.png" type="image/png" sizes="32x32">
+<script type="module">
+
+import {define} from "./_observablehq/client.5446bbef.js";
+
+define({id: "55826645", outputs: ["Plot","d3","Timeline"], body: async () => {
+const [Plot, d3, {Timeline}] = await Promise.all([import("./_npm/@observablehq/plot@0.6.17/d761ef9b.js"), import("./_npm/d3@7.9.0/e780feca.js"), import("./_import/components/timeline.a41f0a1d.js")]);
+
+return {Plot,d3,Timeline};
+}});
+
+define({id: "f6308ddb", inputs: ["d3"], outputs: ["startDate","endDate","monthlyData","movingAverage","dataWithMA"], body: (d3) => {
+// Generate synthetic climate data
+const startDate = new Date(1950, 0, 1);
+const endDate = new Date(2024, 0, 1);
+const monthlyData = d3.timeMonth.range(startDate, endDate).map(date => {
+  const year = date.getFullYear();
+  const month = date.getMonth();
+  
+  // Simulate warming trend with seasonal variation
+  const trend = (year - 1950) * 0.015;
+  const seasonal = Math.sin((month / 12) * 2 * Math.PI) * 10;
+  const noise = d3.randomNormal(0, 2)();
+  const anomaly = trend + seasonal/10 + noise;
+  
+  return {
+    date: date,
+    temperature: anomaly,
+    year: year,
+    month: month,
+    decade: Math.floor(year / 10) * 10
+  };
+});
+
+// Calculate moving average
+const movingAverage = (data, window) => {
+  return data.map((d, i) => {
+    const start = Math.max(0, i - window/2);
+    const end = Math.min(data.length, i + window/2);
+    const subset = data.slice(start, end);
+    return {
+      ...d,
+      ma: d3.mean(subset, d => d.temperature)
+    };
+  });
+};
+
+const dataWithMA = movingAverage(monthlyData, 12);
+return {startDate,endDate,monthlyData,movingAverage,dataWithMA};
+}});
+
+define({id: "896b80f9", inputs: ["Plot","dataWithMA","display"], body: async (Plot,dataWithMA,display) => {
+display(await(
+Plot.plot({
+  title: "Global Temperature Anomalies (1950-2024)",
+  subtitle: "Monthly observations with 12-month moving average",
+  width: 900,
+  height: 400,
+  marginLeft: 60,
+  x: {label: "Year →"},
+  y: {label: "↑ Temperature Anomaly (°C)", grid: true, zero: true},
+  marks: [
+    Plot.ruleY([0], {stroke: "black", strokeWidth: 1}),
+    Plot.line(dataWithMA, {
+      x: "date",
+      y: "temperature",
+      stroke: "lightgray",
+      strokeWidth: 0.5,
+      opacity: 0.5
+    }),
+    Plot.line(dataWithMA, {
+      x: "date",
+      y: "ma",
+      stroke: "red",
+      strokeWidth: 2,
+      tip: true
+    }),
+    Plot.text(["Monthly Data"], {
+      x: new Date(1960, 0),
+      y: -3,
+      fill: "lightgray"
+    }),
+    Plot.text(["12-Month Average"], {
+      x: new Date(1960, 0),
+      y: -2,
+      fill: "red"
+    })
+  ]
+})
+))
+}});
+
+define({id: "ea6c9e64", inputs: ["d3","monthlyData"], outputs: ["yearlyData","monthlyAverages","decomposed"], body: (d3,monthlyData) => {
+// Extract trend, seasonal, and residual components
+const yearlyData = d3.rollup(
+  monthlyData,
+  v => d3.mean(v, d => d.temperature),
+  d => d.year
+);
+
+const monthlyAverages = d3.rollup(
+  monthlyData,
+  v => d3.mean(v, d => d.temperature),
+  d => d.month
+);
+
+const decomposed = monthlyData.map(d => {
+  const trend = yearlyData.get(d.year) || 0;
+  const seasonal = monthlyAverages.get(d.month) || 0;
+  const residual = d.temperature - trend - seasonal;
+  
+  return {
+    date: d.date,
+    observed: d.temperature,
+    trend: trend,
+    seasonal: seasonal,
+    residual: residual
+  };
+});
+return {yearlyData,monthlyAverages,decomposed};
+}});
+
+define({id: "8266dd60", inputs: ["Plot","decomposed","display"], body: async (Plot,decomposed,display) => {
+display(await(
+Plot.plot({
+  title: "Seasonal Decomposition of Temperature Data",
+  width: 900,
+  height: 600,
+  marginLeft: 60,
+  facet: {
+    data: decomposed.flatMap(d => [
+      {date: d.date, value: d.observed, component: "Observed"},
+      {date: d.date, value: d.trend, component: "Trend"},
+      {date: d.date, value: d.seasonal, component: "Seasonal"},
+      {date: d.date, value: d.residual, component: "Residual"}
+    ]),
+    y: "component"
+  },
+  marks: [
+    Plot.frame(),
+    Plot.line(decomposed.flatMap(d => [
+      {date: d.date, value: d.observed, component: "Observed"},
+      {date: d.date, value: d.trend, component: "Trend"},
+      {date: d.date, value: d.seasonal, component: "Seasonal"},
+      {date: d.date, value: d.residual, component: "Residual"}
+    ]), {
+      x: "date",
+      y: "value",
+      fy: "component",
+      stroke: d => ({
+        "Observed": "black",
+        "Trend": "red",
+        "Seasonal": "blue",
+        "Residual": "gray"
+      }[d.component])
+    })
+  ]
+})
+))
+}});
+
+define({id: "de941a57", inputs: ["d3"], outputs: ["economicData","indicators","dates"], body: (d3) => {
+// Generate economic indicators
+const economicData = [];
+const indicators = ["GDP Growth", "Inflation", "Unemployment", "Interest Rate"];
+const dates = d3.timeMonth.range(new Date(2019, 0), new Date(2024, 11));
+
+indicators.forEach(indicator => {
+  let value = indicator === "GDP Growth" ? 2 :
+              indicator === "Inflation" ? 2 :
+              indicator === "Unemployment" ? 5 : 3;
+  
+  dates.forEach(date => {
+    // Add random walk with bounds
+    value += d3.randomNormal(0, 0.3)();
+    value = Math.max(0, Math.min(10, value));
+    
+    // Add COVID shock
+    if (date >= new Date(2020, 2) && date <= new Date(2020, 6)) {
+      if (indicator === "Unemployment") value += 5;
+      if (indicator === "GDP Growth") value -= 3;
+    }
+    
+    economicData.push({
+      date: date,
+      indicator: indicator,
+      value: value,
+      year: date.getFullYear()
+    });
+  });
+});
+return {economicData,indicators,dates};
+}});
+
+define({id: "4ad5d936", inputs: ["Plot","economicData","display"], body: async (Plot,economicData,display) => {
+display(await(
+Plot.plot({
+  title: "Economic Indicators (2019-2024)",
+  subtitle: "Comparing key economic metrics over time",
+  width: 900,
+  height: 500,
+  marginLeft: 60,
+  marginRight: 120,
+  x: {label: null},
+  y: {label: "↑ Percentage (%)", grid: true},
+  color: {legend: true},
+  marks: [
+    Plot.lineY(economicData, {
+      x: "date",
+      y: "value",
+      stroke: "indicator",
+      strokeWidth: 2,
+      tip: true
+    }),
+    Plot.ruleX([new Date(2020, 2)], {
+      stroke: "red",
+      strokeDasharray: "5,5"
+    }),
+    Plot.text(["Pandemic Start"], {
+      x: new Date(2020, 2),
+      y: 10,
+      fill: "red",
+      fontSize: 10,
+      dx: 5
+    })
+  ]
+})
+))
+}});
+
+define({id: "409ad48f", inputs: ["d3"], outputs: ["historicalMonths","forecastMonths","allMonths","forecastData"], body: (d3) => {
+// Create historical data and forecast
+const historicalMonths = 60;
+const forecastMonths = 24;
+const allMonths = historicalMonths + forecastMonths;
+
+// Generate base time series with trend and seasonality
+const forecastData = d3.range(allMonths).map(i => {
+  const date = d3.timeMonth.offset(new Date(2020, 0), i);
+  const trend = i * 0.5;
+  const seasonal = Math.sin((i / 12) * 2 * Math.PI) * 20;
+  const noise = i < historicalMonths ? d3.randomNormal(0, 5)() : 0;
+  
+  const value = 100 + trend + seasonal + noise;
+  
+  // Generate forecast with increasing uncertainty
+  const isForecast = i >= historicalMonths;
+  const forecastValue = isForecast ? value + d3.randomNormal(0, 2)() : null;
+  const uncertainty = isForecast ? (i - historicalMonths) * 2 : 0;
+  
+  return {
+    date: date,
+    actual: !isForecast ? value : null,
+    forecast: forecastValue,
+    lower: forecastValue ? forecastValue - uncertainty : null,
+    upper: forecastValue ? forecastValue + uncertainty : null,
+    type: isForecast ? "Forecast" : "Historical"
+  };
+});
+return {historicalMonths,forecastMonths,allMonths,forecastData};
+}});
+
+define({id: "4b898f5e", inputs: ["Plot","forecastData","d3","historicalMonths","display"], body: async (Plot,forecastData,d3,historicalMonths,display) => {
+display(await(
+Plot.plot({
+  title: "Time Series Forecast with Prediction Intervals",
+  subtitle: "24-month forecast with 95% confidence bands",
+  width: 900,
+  height: 400,
+  marginLeft: 60,
+  x: {label: "Date →"},
+  y: {label: "↑ Value", grid: true},
+  marks: [
+    // Confidence interval
+    Plot.areaY(forecastData.filter(d => d.forecast), {
+      x: "date",
+      y1: "lower",
+      y2: "upper",
+      fill: "lightblue",
+      fillOpacity: 0.3
+    }),
+    // Historical data
+    Plot.line(forecastData.filter(d => d.actual), {
+      x: "date",
+      y: "actual",
+      stroke: "black",
+      strokeWidth: 2
+    }),
+    // Forecast
+    Plot.line(forecastData.filter(d => d.forecast), {
+      x: "date",
+      y: "forecast",
+      stroke: "blue",
+      strokeWidth: 2,
+      strokeDasharray: "5,5"
+    }),
+    // Dividing line
+    Plot.ruleX([d3.timeMonth.offset(new Date(2020, 0), historicalMonths)], {
+      stroke: "gray",
+      strokeDasharray: "2,2"
+    }),
+    Plot.text(["Historical"], {
+      x: new Date(2022, 0),
+      y: 170,
+      fill: "black"
+    }),
+    Plot.text(["Forecast"], {
+      x: new Date(2025, 6),
+      y: 170,
+      fill: "blue"
+    })
+  ]
+})
+))
+}});
+
+define({id: "6dd0c05c", outputs: ["milestones"], body: () => {
+// Define research project milestones
+const milestones = [
+  {date: new Date(2023, 0, 15), label: "Project Initiation", type: "start"},
+  {date: new Date(2023, 2, 1), label: "Literature Review Complete", type: "milestone"},
+  {date: new Date(2023, 5, 15), label: "Data Collection Phase 1", type: "data"},
+  {date: new Date(2023, 8, 1), label: "Preliminary Analysis", type: "analysis"},
+  {date: new Date(2023, 11, 1), label: "Data Collection Phase 2", type: "data"},
+  {date: new Date(2024, 2, 15), label: "Statistical Analysis Complete", type: "analysis"},
+  {date: new Date(2024, 5, 1), label: "First Draft Complete", type: "writing"},
+  {date: new Date(2024, 7, 15), label: "Peer Review", type: "review"},
+  {date: new Date(2024, 9, 1), label: "Revisions Complete", type: "writing"},
+  {date: new Date(2024, 10, 15), label: "Publication", type: "end"}
+];
+return {milestones};
+}});
+
+define({id: "2c10fbb2", inputs: ["Timeline","milestones","display"], body: async (Timeline,milestones,display) => {
+display(await(
+Timeline(milestones, {
+  title: "Research Project Timeline",
+  startDate: new Date(2023, 0, 1),
+  endDate: new Date(2024, 11, 31),
+  height: 300,
+  width: 900
+})
+))
+}});
+
+define({id: "0b3579df", inputs: ["d3","monthlyData"], outputs: ["calculateACF","temperatureValues","acfData"], body: (d3,monthlyData) => {
+// Calculate autocorrelation function
+function calculateACF(data, maxLag = 20) {
+  const mean = d3.mean(data);
+  const variance = d3.variance(data);
+  const n = data.length;
+  
+  return d3.range(0, maxLag + 1).map(lag => {
+    if (lag === 0) return {lag: 0, acf: 1, significant: true};
+    
+    let sum = 0;
+    for (let i = 0; i < n - lag; i++) {
+      sum += (data[i] - mean) * (data[i + lag] - mean);
+    }
+    
+    const acf = sum / ((n - lag) * variance);
+    const criticalValue = 1.96 / Math.sqrt(n); // 95% confidence
+    
+    return {
+      lag: lag,
+      acf: acf,
+      significant: Math.abs(acf) > criticalValue,
+      upper: criticalValue,
+      lower: -criticalValue
+    };
+  });
+}
+
+const temperatureValues = monthlyData.map(d => d.temperature);
+const acfData = calculateACF(temperatureValues, 36);
+return {calculateACF,temperatureValues,acfData};
+}});
+
+define({id: "801dece0", inputs: ["Plot","acfData","display"], body: async (Plot,acfData,display) => {
+display(await(
+Plot.plot({
+  title: "Autocorrelation Function (ACF)",
+  subtitle: "Testing for serial correlation in temperature data",
+  width: 800,
+  height: 300,
+  marginBottom: 40,
+  x: {label: "Lag (months) →", domain: [0, 36]},
+  y: {label: "↑ ACF", domain: [-0.5, 1], grid: true, zero: true},
+  marks: [
+    Plot.ruleY([0], {stroke: "black"}),
+    Plot.ruleY(acfData[0].upper, {stroke: "blue", strokeDasharray: "5,5", opacity: 0.5}),
+    Plot.ruleY(acfData[0].lower, {stroke: "blue", strokeDasharray: "5,5", opacity: 0.5}),
+    Plot.lineY(acfData, {
+      x: "lag",
+      y: "acf",
+      stroke: "gray",
+      strokeWidth: 0.5
+    }),
+    Plot.dot(acfData, {
+      x: "lag",
+      y: "acf",
+      r: 3,
+      fill: d => d.significant ? "red" : "gray"
+    })
+  ]
+})
+))
+}});
+
+define({id: "e02cef44", inputs: ["monthlyData","d3"], outputs: ["rollingWindow","volatilityData"], body: (monthlyData,d3) => {
+// Calculate rolling volatility
+const rollingWindow = 12;
+const volatilityData = monthlyData.map((d, i) => {
+  const start = Math.max(0, i - rollingWindow);
+  const end = i + 1;
+  const window = monthlyData.slice(start, end).map(d => d.temperature);
+  
+  return {
+    date: d.date,
+    volatility: d3.deviation(window),
+    temperature: d.temperature
+  };
+}).filter((d, i) => i >= rollingWindow);
+return {rollingWindow,volatilityData};
+}});
+
+define({id: "ce00ef21", inputs: ["Plot","volatilityData","display"], body: async (Plot,volatilityData,display) => {
+display(await(
+Plot.plot({
+  title: "Temperature Volatility Over Time",
+  subtitle: "12-month rolling standard deviation",
+  width: 900,
+  height: 400,
+  marginLeft: 60,
+  y: {
+    label: "↑ Volatility (σ)",
+    grid: true
+  },
+  marks: [
+    Plot.areaY(volatilityData, {
+      x: "date",
+      y: "volatility",
+      fill: "steelblue",
+      fillOpacity: 0.3
+    }),
+    Plot.line(volatilityData, {
+      x: "date",
+      y: "volatility",
+      stroke: "steelblue",
+      strokeWidth: 2,
+      tip: true
+    })
+  ]
+})
+))
+}});
+
+define({id: "082fd285", inputs: ["d3","temperatureValues"], outputs: ["detectChangePoints","changePointData"], body: (d3,temperatureValues) => {
+// Simple change point detection using cumulative sum
+function detectChangePoints(data, threshold = 2) {
+  const mean = d3.mean(data);
+  const sd = d3.deviation(data);
+  
+  let cusum = 0;
+  const cusumData = data.map((value, i) => {
+    cusum += (value - mean) / sd;
+    return {
+      index: i,
+      value: value,
+      cusum: cusum,
+      changePoint: Math.abs(cusum) > threshold
+    };
+  });
+  
+  return cusumData;
+}
+
+const changePointData = detectChangePoints(temperatureValues.slice(-120)); // Last 10 years
+return {detectChangePoints,changePointData};
+}});
+
+define({id: "b87ff433", inputs: ["Plot","changePointData","display"], body: async (Plot,changePointData,display) => {
+display(await(
+Plot.plot({
+  title: "Change Point Detection using CUSUM",
+  subtitle: "Identifying structural breaks in the time series",
+  width: 900,
+  height: 400,
+  marginLeft: 60,
+  facet: {
+    data: changePointData.flatMap(d => [
+      {index: d.index, value: d.value, type: "Temperature"},
+      {index: d.index, value: d.cusum, type: "CUSUM"}
+    ]),
+    y: "type",
+    shareX: true
+  },
+  marks: [
+    Plot.frame(),
+    Plot.line(changePointData.flatMap(d => [
+      {index: d.index, value: d.value, type: "Temperature"},
+      {index: d.index, value: d.cusum, type: "CUSUM"}
+    ]), {
+      x: "index",
+      y: "value",
+      fy: "type",
+      stroke: d => d.type === "Temperature" ? "black" : "red"
+    }),
+    Plot.dot(changePointData.filter(d => d.changePoint).flatMap(d => [
+      {index: d.index, value: d.value, type: "Temperature"},
+      {index: d.index, value: d.cusum, type: "CUSUM"}
+    ]), {
+      x: "index",
+      y: "value",
+      fy: "type",
+      fill: "red",
+      r: 4
+    })
+  ]
+})
+))
+}});
+
+define({id: "c20cf5d1", inputs: ["d3","monthlyData"], outputs: ["periodStats","statsTable"], body: (d3,monthlyData) => {
+const periodStats = d3.rollup(
+  monthlyData,
+  v => ({
+    mean: d3.mean(v, d => d.temperature),
+    std: d3.deviation(v, d => d.temperature),
+    min: d3.min(v, d => d.temperature),
+    max: d3.max(v, d => d.temperature),
+    trend: (v[v.length-1].temperature - v[0].temperature) / v.length
+  }),
+  d => d.decade
+);
+
+const statsTable = Array.from(periodStats, ([decade, stats]) => ({
+  Decade: `${decade}s`,
+  "Mean Temp": stats.mean.toFixed(3),
+  "Std Dev": stats.std.toFixed(3),
+  "Min": stats.min.toFixed(3),
+  "Max": stats.max.toFixed(3),
+  "Trend": stats.trend.toFixed(4)
+}));
+return {periodStats,statsTable};
+}});
+
+define({id: "520bd2b3", inputs: ["Inputs","statsTable","display"], body: async (Inputs,statsTable,display) => {
+display(await(
+Inputs.table(statsTable, {
+  columns: ["Decade", "Mean Temp", "Std Dev", "Min", "Max", "Trend"]
+})
+))
+}});
+
+</script>
+</head>
+<body>
+<input id="observablehq-sidebar-toggle" type="checkbox" title="Toggle sidebar">
+<label id="observablehq-sidebar-backdrop" for="observablehq-sidebar-toggle"></label>
+<nav id="observablehq-sidebar">
+  <ol>
+    <label id="observablehq-sidebar-close" for="observablehq-sidebar-toggle"></label>
+    <li class="observablehq-link"><a href="./">Research Report Publishing Platform</a></li>
+  </ol>
+  <ol>
+    <li class="observablehq-link"><a href="./">Home</a></li>
+  </ol>
+  <section class="observablehq-section-active">
+    <summary>Data Visualization</summary>
+    <ol>
+    <li class="observablehq-link"><a href="./statistical-analysis">Statistical Analysis</a></li>
+    <li class="observablehq-link observablehq-link-active"><a href="./time-series">Time Series</a></li>
+    <li class="observablehq-link"><a href="./geospatial">Geospatial Data</a></li>
+    <li class="observablehq-link"><a href="./network-analysis">Network Analysis</a></li>
+    </ol>
+  </section>
+  <section>
+    <summary>Reports &amp; Tables</summary>
+    <ol>
+    <li class="observablehq-link"><a href="./data-tables">Data Tables</a></li>
+    <li class="observablehq-link"><a href="./methods">Methods &amp; References</a></li>
+    </ol>
+  </section>
+</nav>
+<script>{const e=document.querySelector("#observablehq-sidebar"),o=document.querySelector("#observablehq-sidebar-toggle"),r=sessionStorage.getItem("observablehq-sidebar");r?o.checked=r==="true":o.indeterminate=!0;for(const t of document.querySelectorAll("#observablehq-sidebar summary")){const s=t.parentElement;switch(sessionStorage.getItem(`observablehq-sidebar:${t.textContent}`)){case"true":s.open=!0;break;case"false":s.classList.contains("observablehq-section-active")||(s.open=!1);break}}addEventListener("beforeunload",()=>sessionStorage.setItem("observablehq-sidebar-scrolly",`${e.scrollTop}`));const a=sessionStorage.getItem("observablehq-sidebar-scrolly");a!=null&&(e.style.cssText="overflow: hidden;",e.scrollTop=+a,e.style.cssText="");}</script>
+<div id="observablehq-center">
+<aside id="observablehq-toc" data-selector="h1:not(:first-of-type)[id], h2:first-child[id], :not(h1) + h2[id]">
+<nav>
+<div>Contents</div>
+<ol>
+<li class="observablehq-secondary-link"><a href="#climate-data-analysis">Climate Data Analysis</a></li>
+<li class="observablehq-secondary-link"><a href="#economic-indicators">Economic Indicators</a></li>
+<li class="observablehq-secondary-link"><a href="#forecasting">Forecasting</a></li>
+<li class="observablehq-secondary-link"><a href="#event-timeline">Event Timeline</a></li>
+<li class="observablehq-secondary-link"><a href="#autocorrelation-analysis">Autocorrelation Analysis</a></li>
+<li class="observablehq-secondary-link"><a href="#volatility-analysis">Volatility Analysis</a></li>
+<li class="observablehq-secondary-link"><a href="#change-point-detection">Change Point Detection</a></li>
+<li class="observablehq-secondary-link"><a href="#summary-statistics-by-period">Summary Statistics by Period</a></li>
+<li class="observablehq-secondary-link"><a href="#methods-and-applications">Methods and Applications</a></li>
+</ol>
+</nav>
+</aside>
+<main id="observablehq-main" class="observablehq">
+<h1 id="time-series-analysis" tabindex="-1"><a class="observablehq-header-anchor" href="#time-series-analysis">Time Series Analysis</a></h1>
+<p>Time series data is ubiquitous in research, from economic indicators to climate measurements. This page demonstrates various techniques for analyzing and visualizing temporal data<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>.</p>
+<div class="observablehq observablehq--block"><!--:55826645:--></div>
+<h2 id="climate-data-analysis" tabindex="-1"><a class="observablehq-header-anchor" href="#climate-data-analysis">Climate Data Analysis</a></h2>
+<h3 id="temperature-anomalies-over-time" tabindex="-1"><a class="observablehq-header-anchor" href="#temperature-anomalies-over-time">Temperature Anomalies Over Time</a></h3>
+<div class="observablehq observablehq--block"><!--:f6308ddb:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:896b80f9:--></div>
+<h3 id="seasonal-decomposition" tabindex="-1"><a class="observablehq-header-anchor" href="#seasonal-decomposition">Seasonal Decomposition</a></h3>
+<p>Time series often contain trend, seasonal, and irregular components<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>. Here we decompose the signal:</p>
+<div class="observablehq observablehq--block"><!--:ea6c9e64:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:8266dd60:--></div>
+<h2 id="economic-indicators" tabindex="-1"><a class="observablehq-header-anchor" href="#economic-indicators">Economic Indicators</a></h2>
+<h3 id="multiple-time-series-comparison" tabindex="-1"><a class="observablehq-header-anchor" href="#multiple-time-series-comparison">Multiple Time Series Comparison</a></h3>
+<div class="observablehq observablehq--block"><!--:de941a57:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:4ad5d936:--></div>
+<h2 id="forecasting" tabindex="-1"><a class="observablehq-header-anchor" href="#forecasting">Forecasting</a></h2>
+<h3 id="time-series-forecasting-with-confidence-intervals" tabindex="-1"><a class="observablehq-header-anchor" href="#time-series-forecasting-with-confidence-intervals">Time Series Forecasting with Confidence Intervals</a></h3>
+<div class="observablehq observablehq--block"><!--:409ad48f:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:4b898f5e:--></div>
+<h2 id="event-timeline" tabindex="-1"><a class="observablehq-header-anchor" href="#event-timeline">Event Timeline</a></h2>
+<p>Using our custom Timeline component to show research milestones<sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup>:</p>
+<div class="observablehq observablehq--block"><!--:6dd0c05c:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:2c10fbb2:--></div>
+<h2 id="autocorrelation-analysis" tabindex="-1"><a class="observablehq-header-anchor" href="#autocorrelation-analysis">Autocorrelation Analysis</a></h2>
+<h3 id="acf-and-pacf-plots" tabindex="-1"><a class="observablehq-header-anchor" href="#acf-and-pacf-plots">ACF and PACF Plots</a></h3>
+<p>Autocorrelation helps identify patterns and dependencies in time series data<sup class="footnote-ref"><a href="#fn4" id="fnref4">[4]</a></sup>.</p>
+<div class="observablehq observablehq--block"><!--:0b3579df:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:801dece0:--></div>
+<h2 id="volatility-analysis" tabindex="-1"><a class="observablehq-header-anchor" href="#volatility-analysis">Volatility Analysis</a></h2>
+<h3 id="rolling-standard-deviation" tabindex="-1"><a class="observablehq-header-anchor" href="#rolling-standard-deviation">Rolling Standard Deviation</a></h3>
+<div class="observablehq observablehq--block"><!--:e02cef44:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:ce00ef21:--></div>
+<h2 id="change-point-detection" tabindex="-1"><a class="observablehq-header-anchor" href="#change-point-detection">Change Point Detection</a></h2>
+<p>Identifying structural breaks in time series<sup class="footnote-ref"><a href="#fn5" id="fnref5">[5]</a></sup>:</p>
+<div class="observablehq observablehq--block"><!--:082fd285:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:b87ff433:--></div>
+<h2 id="summary-statistics-by-period" tabindex="-1"><a class="observablehq-header-anchor" href="#summary-statistics-by-period">Summary Statistics by Period</a></h2>
+<div class="observablehq observablehq--block"><!--:c20cf5d1:--></div>
+<div class="observablehq observablehq--block"><observablehq-loading></observablehq-loading><!--:520bd2b3:--></div>
+<h2 id="methods-and-applications" tabindex="-1"><a class="observablehq-header-anchor" href="#methods-and-applications">Methods and Applications</a></h2>
+<p>Time series analysis is crucial for understanding temporal patterns in data<sup class="footnote-ref"><a href="#fn6" id="fnref6">[6]</a></sup>. Key applications include:</p>
+<ol>
+<li><strong>Climate Science</strong>: Analyzing temperature trends and detecting climate change signals</li>
+<li><strong>Economics</strong>: Forecasting GDP, inflation, and market indicators</li>
+<li><strong>Epidemiology</strong>: Tracking disease spread and seasonal patterns</li>
+<li><strong>Engineering</strong>: Monitoring system performance and detecting anomalies</li>
+</ol>
+<hr>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>Time series analysis involves statistical techniques for analyzing time-ordered data points. Box, G.E.P., Jenkins, G.M., Reinsel, G.C., &amp; Ljung, G.M. (2015). Time Series Analysis: Forecasting and Control (5th ed.). Wiley. <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>Seasonal decomposition separates a time series into trend, seasonal, and residual components. The STL (Seasonal and Trend decomposition using Loess) method is particularly robust. Cleveland, R.B., Cleveland, W.S., McRae, J.E., &amp; Terpenning, I. (1990). STL: A seasonal-trend decomposition procedure based on loess. Journal of Official Statistics, 6(1), 3-73. <a href="#fnref2" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p>Timeline visualizations help communicate the temporal sequence of events in research projects. They are particularly useful for project management and presenting research progress to stakeholders. <a href="#fnref3" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn4" class="footnote-item"><p>The Autocorrelation Function (ACF) and Partial Autocorrelation Function (PACF) are essential tools for identifying the order of ARIMA models. Ljung, G.M., &amp; Box, G.E.P. (1978). On a measure of lack of fit in time series models. Biometrika, 65(2), 297-303. <a href="#fnref4" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn5" class="footnote-item"><p>Change point detection identifies times when the statistical properties of a time series change. The CUSUM (Cumulative Sum) method is one of the simplest approaches. Page, E.S. (1954). Continuous inspection schemes. Biometrika, 41(1/2), 100-115. <a href="#fnref5" class="footnote-backref">↩︎</a></p>
+</li>
+<li id="fn6" class="footnote-item"><p>For comprehensive coverage of modern time series methods, see: Hyndman, R.J., &amp; Athanasopoulos, G. (2021). Forecasting: Principles and Practice (3rd ed.). OTexts. Available online at <a href="https://otexts.com/fpp3/" target="_blank" rel="noopener noreferrer">https://otexts.com/fpp3/</a> <a href="#fnref6" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+</main>
+<footer id="observablehq-footer">
+<nav><a rel="prev" href="./statistical-analysis"><span>Statistical Analysis</span></a><a rel="next" href="./geospatial"><span>Geospatial Data</span></a></nav>
+<div>Built with Observable Framework on Aug 11, 2025.</div>
+</footer>
+</div>
+</body>
+</html>
