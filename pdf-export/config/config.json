@@ -1,0 +1,77 @@
+{
+  "defaults": {
+    "format": "A4",
+    "margin": {
+      "top": "20mm",
+      "right": "15mm",
+      "bottom": "20mm",
+      "left": "15mm"
+    },
+    "printBackground": true,
+    "preferCSSPageSize": true,
+    "displayHeaderFooter": false,
+    "timeout": 30000
+  },
+  "documents": {
+    "dashboard": {
+      "format": "A3",
+      "landscape": true,
+      "margin": {
+        "top": "15mm",
+        "right": "15mm",
+        "bottom": "15mm",
+        "left": "15mm"
+      }
+    },
+    "example-dashboard": {
+      "format": "A3",
+      "landscape": true
+    },
+    "report": {
+      "format": "A4",
+      "headerTemplate": "Technical Report"
+    },
+    "chart": {
+      "format": "A4",
+      "landscape": true
+    }
+  },
+  "excludeFiles": [
+    "_observablehq",
+    "404.html",
+    "_dist",
+    "_import"
+  ],
+  "waitConditions": {
+    "waitForSVGs": true,
+    "waitForImages": true,
+    "additionalWaitTime": 2000
+  },
+  "qrCode": {
+    "enabled": true,
+    "baseUrl": "https://bmmilligan1.github.io/BBNJ-CHM",
+    "width": 65,
+    "margin": 1,
+    "errorCorrectionLevel": "M",
+    "colors": {
+      "dark": "#003355",
+      "light": "#ffffff"
+    },
+    "position": {
+      "class": "qr-code-margin-left",
+      "title": "View on GitHub"
+    },
+    "documents": {
+      "dashboard": {
+        "position": {
+          "class": "qr-code-top-right-dashboard"
+        }
+      },
+      "report": {
+        "position": {
+          "class": "qr-code-margin-left"
+        }
+      }
+    }
+  }
+}

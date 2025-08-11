@@ -1,0 +1,779 @@
+/* PDF Export Styles for Observable Framework */
+/* Academic Journal-Style Formatting */
+
+/* Import Lexend font from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&display=swap');
+
+/* Define font family variables */
+:root {
+  --font-family: 'Lexend', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif;
+  --sans-serif: 'Lexend', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Helvetica Neue', sans-serif;
+}
+
+/* Page setup - Academic style */
+@page {
+  size: A4;
+  margin: 0.75in 0.75in 1in 0.75in;
+  
+  @bottom-right {
+    content: "Page " counter(page) " of " counter(pages) ", updated " var(--render-date, "Date not available") ".";
+    font-family: 'Lexend', sans-serif;
+    font-size: 8pt;
+    color: #666;
+    text-align: right;
+  }
+}
+
+/* First page - no footer */
+@page :first {
+  @bottom-right {
+    content: "";
+  }
+}
+
+/* Reset all Observable styles */
+@media print {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+}
+
+/* Remove Observable Framework UI elements */
+.observablehq-header,
+.observablehq-footer,
+.observablehq-sidebar,
+.observablehq-sidebar-toggle,
+.observablehq-toc,
+.observablehq-toc-toggle,
+.observablehq-search,
+.observablehq-theme-toggle,
+.observablehq-pager,
+#observablehq-sidebar-toggle,
+#observablehq-toc-toggle,
+#observablehq-sidebar,
+#observablehq-toc,
+#observablehq-sidebar-backdrop,
+#observablehq-center > aside,
+label[for="observablehq-sidebar-toggle"] {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+  left: -9999px !important;
+}
+
+/* Style header anchors but keep heading text visible */
+.observablehq-header-anchor {
+  text-decoration: none !important;
+  color: inherit !important;
+}
+
+/* Hide the anchor link icon that Observable adds */
+.observablehq-header-anchor::before {
+  display: none !important;
+}
+
+/* Main content optimization */
+#observablehq-center,
+#observablehq-main,
+.observablehq-main,
+.observablehq,
+main {
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  position: static !important;
+  transform: none !important;
+}
+
+/* Override Observable default styles */
+body > * {
+  font-family: var(--font-family) !important;
+}
+
+/* Remove Observable theme colors */
+[data-theme],
+.observablehq {
+  --theme-background: white !important;
+  --theme-foreground: black !important;
+  background: white !important;
+  color: black !important;
+}
+
+/* Typography for print - Academic journal style */
+body {
+  font-family: var(--font-family);
+  font-size: 9pt;
+  line-height: 1.35;
+  color: #000 !important;
+  background: white !important;
+}
+
+/* Ensure all text is visible */
+* {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Force text color on all elements */
+p, div, span, li, td, th, a, em, strong, code {
+  color: #000 !important;
+}
+
+/* Bold text styling - Use Semibold (600) instead of Bold (700) */
+strong, b {
+  font-weight: 600 !important;
+}
+
+/* Hide horizontal rules - we use borders instead */
+hr {
+  display: none !important;
+}
+
+/* Title page layout - Professional style */
+.hero {
+  min-height: 100vh !important;
+  text-align: center !important;
+  page-break-after: always !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  padding: 2in 1in !important;
+}
+
+/* Title page specific elements */
+.hero h1 {
+  text-align: center !important;
+  margin-bottom: 2rem !important;
+  font-size: 28pt !important;
+  line-height: 1.3 !important;
+  text-transform: none !important;
+  letter-spacing: -0.02em !important;
+}
+
+.hero h2,
+.hero .subtitle {
+  text-align: center !important;
+  font-size: 16pt !important;
+  font-weight: 400 !important;
+  color: #333 !important;
+  margin-bottom: 3rem !important;
+  line-height: 1.4 !important;
+}
+
+.hero .author,
+.hero .date,
+.hero p {
+  text-align: center !important;
+  font-size: 12pt !important;
+  margin-bottom: 1rem !important;
+  color: #444 !important;
+}
+
+/* Headings - Professional hierarchy with distinct styles */
+h1,
+.observablehq h1,
+main h1,
+#observablehq-main h1 {
+  display: block !important;
+  font-family: var(--font-family) !important;
+  font-size: 22pt !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  margin-top: 2rem !important;
+  margin-bottom: 1rem !important;
+  margin-left: 15% !important;
+  color: #000 !important;
+  text-align: left !important;
+  page-break-after: avoid;
+  border: none !important;
+  padding: 0 !important;
+  letter-spacing: -0.01em !important;
+  visibility: visible !important;
+}
+
+h2,
+.observablehq h2,
+main h2,
+#observablehq-main h2 {
+  display: block !important;
+  font-family: var(--font-family) !important;
+  font-size: 16pt !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  margin-top: 1.8rem !important;
+  margin-bottom: 0.8rem !important;
+  margin-left: 15% !important;
+  page-break-after: avoid;
+  color: #1a1a1a !important;
+  text-align: left !important;
+  border: none !important;
+  padding: 0 !important;
+  visibility: visible !important;
+}
+
+h3,
+.observablehq h3,
+main h3,
+#observablehq-main h3 {
+  display: block !important;
+  font-family: var(--font-family) !important;
+  font-size: 13pt !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 0.6rem !important;
+  margin-left: 15% !important;
+  page-break-after: avoid;
+  color: #2a2a2a !important;
+  text-align: left !important;
+  padding: 0 !important;
+  visibility: visible !important;
+}
+
+h4,
+.observablehq h4,
+main h4,
+#observablehq-main h4 {
+  display: block !important;
+  font-family: var(--font-family) !important;
+  font-size: 11pt !important;
+  font-weight: 500 !important;
+  line-height: 1.3 !important;
+  margin-top: 1.2rem !important;
+  margin-bottom: 0.5rem !important;
+  margin-left: 15% !important;
+  page-break-after: avoid;
+  color: #333 !important;
+  text-align: left !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  padding: 0 !important;
+  visibility: visible !important;
+}
+
+/* Paragraphs - Academic formatting */
+p {
+  margin-bottom: 1rem !important;
+  margin-left: 15% !important;
+  text-align: justify !important;
+  word-break: break-word !important;
+  overflow-wrap: break-word !important;
+  hyphens: manual !important;
+  -webkit-hyphens: manual !important;
+  -moz-hyphens: manual !important;
+  orphans: 2;
+  widows: 2;
+  line-height: 1.35 !important;
+  padding: 0 !important;
+}
+
+/* Links - Academic citation style */
+a {
+  color: #000 !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+}
+
+a[href^="http"]:after,
+a[href^="https"]:after {
+  content: " [" attr(href) "]";
+  font-size: 8pt;
+  color: #666;
+  font-weight: normal;
+}
+
+/* Exclude anchor links, footnotes, and QR codes from URL display */
+a.anchor-link:after,
+.footnote-ref a:after,
+.footnote-backref:after,
+.footnotes a:after,
+a[href^="#"]:after,
+a[href^="/"]:after,
+.qr-code-container a:after {
+  content: none !important;
+}
+
+/* Hide footnote back references */
+.footnote-backref {
+  display: none !important;
+}
+
+/* Footnote styling - Fix line-height issues */
+.footnote-ref {
+  vertical-align: super;
+  font-size: 0.65em !important;
+  line-height: 0 !important;
+  position: relative;
+  top: -0.2em;
+}
+
+/* General superscript fix */
+sup {
+  line-height: 0 !important;
+  font-size: 0.65em !important;
+  vertical-align: baseline;
+  position: relative;
+  top: -0.5em;
+}
+
+.footnotes {
+  margin-top: 2rem !important;
+  padding-top: 1rem !important;
+  border-top: 1px solid #333 !important;
+  font-size: 9pt !important;
+}
+
+/* Hide borders on subsequent footnote sections */
+.footnotes + .footnotes {
+  border-top: none !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+.footnotes ol {
+  margin-left: 15% !important;
+  padding-left: 2em !important;
+  list-style-position: outside !important;
+}
+
+.footnotes li {
+  margin-bottom: 0.1rem !important;
+  text-align: left !important;
+  line-height: 1.3 !important;
+  padding-left: 0.5em !important;
+}
+
+/* Reduce spacing between paragraphs in footnotes */
+.footnotes p {
+  margin-bottom: 0.5rem !important;
+  margin-left: 0 !important;
+  text-align: left !important;
+  padding-left: 0 !important;
+}
+
+/* Code blocks - Technical report style */
+pre {
+  background: #f8f8f8 !important;
+  color: #000 !important;
+  border: 1px solid #ccc !important;
+  padding: 0.5rem 0.75rem !important;
+  font-size: 8pt !important;
+  line-height: 1.2 !important;
+  overflow: visible !important;
+  white-space: pre-wrap !important;
+  word-wrap: break-word !important;
+  page-break-inside: avoid;
+  margin: 0.8rem 0 !important;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+  border-radius: 0 !important;
+}
+
+code {
+  background: #f0f0f0 !important;
+  color: #000 !important;
+  padding: 0.1rem 0.2rem !important;
+  font-size: 8pt !important;
+  border: 1px solid #ddd !important;
+  border-radius: 2px !important;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+}
+
+pre code {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* Tables - Academic style */
+table {
+  font-size: 8pt !important;
+  border-collapse: collapse !important;
+  width: calc(100% - 1px) !important;
+  margin: 1rem 0 !important;
+  /* Allow tables to break across pages */
+}
+
+th, td {
+  border: 0.5px solid #666 !important;
+  padding: 0.3rem 0.5rem !important;
+  text-align: left !important;
+  line-height: 1.1 !important;
+  font-size: 8pt !important;
+  page-break-inside: avoid !important;
+}
+
+th {
+  background: #f0f0f0 !important;
+  font-weight: 600 !important;
+  font-size: 8pt !important;
+}
+
+/* Remove alternating row colors for academic style */
+tr:nth-child(even) {
+  background-color: transparent !important;
+}
+
+/* Prevent rows from breaking across pages */
+tr {
+  page-break-inside: avoid !important;
+}
+
+
+/* Ensure table headers repeat on new pages */
+thead {
+  display: table-header-group !important;
+}
+
+tbody {
+  display: table-row-group !important;
+  font-size: 8pt !important;
+}
+
+tfoot {
+  display: table-footer-group !important;
+  font-size: 8pt !important;
+}
+
+/* Removed aggressive table * rule to allow proper footnote sizing */
+/* table * {
+  font-size: 8pt !important;
+} */
+
+/* Extra specificity for Observable tables */
+.observablehq table,
+.observablehq table th,
+.observablehq table td,
+.observablehq table tbody,
+.observablehq table thead,
+.observablehq table tfoot,
+.observablehq table tr {
+  font-size: 8pt !important;
+}
+
+/* Target main content area tables specifically */
+main table,
+#observablehq-main table {
+  font-size: 8pt !important;
+}
+/* Removed main table * rules to allow proper footnote sizing */
+
+/* Simple footnote sizing for tables - just make them smaller */
+table sup,
+table .footnote-ref {
+  font-size: 5pt !important;
+}
+
+/* Optional: Keep small tables together */
+table.keep-together {
+  page-break-inside: avoid !important;
+}
+
+/* Only keep tables together if explicitly marked as small */
+table.small-table {
+  page-break-inside: avoid !important;
+}
+
+/* Blockquotes - Academic style (updated above) */
+blockquote {
+  margin-top: 0.8rem !important;
+  margin-bottom: 0.8rem !important;
+  background: transparent !important;
+  border-left: 3px solid #333 !important;
+  font-style: normal !important;
+  font-size: 9pt !important;
+  line-height: 1.2 !important;
+  page-break-inside: avoid;
+  color: #000 !important;
+}
+
+/* Lists - Academic formatting (removed - handled above) */
+
+
+/* Images and figures */
+img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  margin: 1rem auto !important;
+  page-break-inside: avoid;
+}
+
+figure {
+  margin: 1rem 0 !important;
+  /* Allow figures to break if needed */
+}
+
+figcaption {
+  font-size: 8pt !important;
+  font-style: italic !important;
+  text-align: center !important;
+  margin-top: 0.3rem !important;
+  margin-bottom: 0.8rem !important;
+  color: #333 !important;
+}
+
+/* D3 Visualization Containers - Figure style */
+svg {
+  background: white !important;
+  max-width: 100% !important;
+  height: auto !important;
+  /* Allow SVGs to break if needed */
+  margin: 1rem 0 !important;
+  border: none !important;
+}
+
+/* D3 chart text styling for print */
+svg text {
+  font-family: var(--font-family) !important;
+  fill: #000 !important;
+}
+
+svg .axis text {
+  font-size: 8pt !important;
+  fill: #333 !important;
+}
+
+svg .axis-label {
+  font-size: 9pt !important;
+  font-weight: 600 !important;
+  fill: #000 !important;
+}
+
+svg .chart-title {
+  font-size: 11pt !important;
+  font-weight: 600 !important;
+  fill: #000 !important;
+}
+
+/* D3 chart lines and paths for print */
+svg .axis line,
+svg .axis path {
+  stroke: #666 !important;
+  stroke-width: 0.5px !important;
+}
+
+svg .grid line {
+  stroke: #ddd !important;
+  stroke-dasharray: 1,1 !important;
+}
+
+/* Observable Plot specific */
+.observablehq figure[data-type="plot"] {
+  /* Allow plots to break if needed */
+  margin: 1rem 0 !important;
+}
+
+/* Ensure good page breaks */
+h1, h2, h3, h4, h5, h6 {
+  page-break-after: avoid;
+  page-break-inside: avoid;
+  /* Ensure at least 3 lines of content follow heading on same page */
+  orphans: 3;
+}
+
+/* Prevent h3 specifically from appearing at bottom of page */
+h3 {
+  /* Ensure sufficient space after h3 or move to next page */
+  break-after: avoid-page;
+}
+
+/* Keep headings with their immediate following content (but not tables) */
+h1 + p, h1 + ul, h1 + ol, h1 + blockquote,
+h2 + p, h2 + ul, h2 + ol, h2 + blockquote,
+h3 + p, h3 + ul, h3 + ol, h3 + blockquote,
+h4 + p, h4 + ul, h4 + ol, h4 + blockquote {
+  page-break-before: avoid;
+}
+
+/* Only keep explicitly marked small tables with their headings */
+h1 + table.small-table,
+h2 + table.small-table,
+h3 + table.small-table,
+h4 + table.small-table {
+  page-break-before: avoid;
+}
+
+figure,
+pre,
+blockquote {
+  page-break-inside: avoid;
+}
+
+/* Page breaks */
+.page-break {
+  page-break-before: always;
+}
+
+.no-break {
+  page-break-inside: avoid;
+}
+
+/* Ensure color accuracy */
+* {
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+  color-adjust: exact !important;
+}
+
+/* Hide interactive elements */
+button,
+input,
+select,
+textarea,
+.interactive,
+.observablehq-loading {
+  display: none !important;
+}
+
+/* Remove animations and transitions */
+* {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* QR Code Styling for PDF */
+.qr-code-container {
+  position: absolute !important;
+  z-index: 1000 !important;
+  /* Minimal styling - just the QR code */
+  display: block !important;
+  page-break-inside: avoid !important;
+  page-break-after: avoid !important;
+}
+
+.qr-code-image {
+  width: 65px !important;
+  height: 65px !important;
+  display: block !important;
+  margin: 0 !important;
+}
+
+/* Position: Top right corner (default) */
+.qr-code-top-right {
+  top: 10mm !important;
+  right: 10mm !important;
+}
+
+/* Position: Outside right margin for reports */
+.qr-code-margin-right {
+  top: 30mm !important;
+  right: 5mm !important;
+}
+
+/* Position: Top right for dashboards (A3) */
+.qr-code-top-right-dashboard {
+  top: 10mm !important;
+  right: 10mm !important;
+}
+
+/* Position: Outside left margin, top-aligned with page margin */
+.qr-code-margin-left {
+  left: 2mm !important; /* In left margin, visible on page */
+  top: 10mm !important; /* Higher up on the page */
+}
+
+/* QR Code first page only display - using absolute positioning */
+/* Absolute positioning ensures it only appears where injected (first page) */
+.qr-code-first-page {
+  position: absolute !important;
+  page-break-inside: avoid !important;
+}
+
+/* Grid and card layouts for print */
+.grid {
+  display: block !important;
+}
+
+.card {
+  border: 1px solid #666 !important;
+  padding: 0.8rem !important;
+  margin-bottom: 1rem !important;
+  page-break-inside: avoid;
+  background: #f9f9f9 !important;
+}
+
+/* Reset body padding */
+body {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Blockquotes and pre blocks with left margin */
+blockquote {
+  margin-left: calc(15% + 2em) !important;
+  padding-left: 1em !important;
+}
+
+pre {
+  margin-left: 15% !important;
+  margin-right: 0 !important;
+  padding: 0.5rem 0.75rem !important;
+}
+
+/* Lists need special handling for proper bullet alignment */
+body > ul, body > ol,
+main ul, main ol,
+#observablehq-main ul, #observablehq-main ol,
+.observablehq ul:not(.footnotes ol), .observablehq ol:not(.footnotes ol) {
+  margin-bottom: 0.8rem !important;
+  margin-left: 15% !important;
+  padding-left: 2em !important;
+  list-style-position: outside !important;
+}
+
+/* Nested lists */
+ul ul, ul ol, ol ul, ol ol,
+li > ul, li > ol {
+  margin-left: 0 !important;
+  padding-left: 2em !important;
+}
+
+/* List items */
+li {
+  margin-bottom: 0.3rem !important;
+  line-height: 1.35 !important;
+  text-align: justify !important;
+  padding-left: 0 !important;
+}
+
+/* Ensure list item content is properly aligned */
+li > p {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
+}
+
+/* Tables stay at full width */
+table {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: calc(100% - 1px) !important;
+  max-width: calc(100% - 1px) !important;
+}
+
+/* Images and figures stay at full width */
+img, figure, svg {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* D3 visualizations stay full width */
+.observablehq figure[data-type="plot"] {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
