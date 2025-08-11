@@ -16,7 +16,7 @@
 
 This platform provides researchers with a modern, reproducible workflow for creating data-driven research outputs that work both as **interactive web dashboards** and **professional PDF reports**. Built on Observable Framework with advanced PDF generation, it bridges the gap between dynamic data visualization and traditional academic publishing. 
 
-The platform is a side-quest so please be patient (but also vocal and proactive) with any errors or issues you encounter. We are actively developing it to meet the needs of researchers.
+The platform is a side-quest so please be patient (but also vocal and proactive) with any errors or issues you encounter. We are actively developing it to meet the needs of researchers and other stakeholders.
 
 ```
 📊 Your Data → 🎨 Visualizations → 🌐 Interactive Web + 📄 Print PDF → 🚀 Published Research
