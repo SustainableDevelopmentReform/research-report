@@ -66,7 +66,7 @@ You'll need:
 
 1. **Clone this template**
    ```bash
-   git clone https://github.com/yourusername/research-report.git my-research
+   git clone https://github.com/SustainableDevelopmentReform/research-report.git my-research
    cd my-research
    ```
 
@@ -98,47 +98,85 @@ You'll need:
    ```
    Your PDF appears in `pdf-export/output/`!
 
-### 🎬 Video Tutorials
 
-- [Getting Started (10 min)](https://example.com) - From zero to first visualization
-- [Adding Your Research Data (8 min)](https://example.com) - CSV, JSON, and API data
-- [Creating Publication-Ready PDFs (12 min)](https://example.com) - Export and formatting
+## 💡 Working Examples
 
-## 💡 Examples & Templates
-
-### Research Report with Citations
-```markdown
-# Climate Change Impact Analysis
-
-${ResearchSummary}
-
-## Introduction
-
-Recent studies [@smith2023; @jones2024] demonstrate...
-
+### Using the Timeline Component
 ```javascript
-Plot.plot({
-  marks: [
-    Plot.line(data, {x: "year", y: "temperature"})
-  ]
+import {Timeline} from "./components/timeline.js";
+
+const events = [
+  {date: "2023-01", label: "Project Start"},
+  {date: "2023-06", label: "Data Collection"},
+  {date: "2024-01", label: "Analysis Complete"}
+];
+
+Timeline(events, {
+  title: "Research Timeline",
+  width: 800
 })
 ```
+
+### Creating a Sankey Diagram
+```javascript
+import {SankeyDiagram} from "./components/sankey-diagram.js";
+
+SankeyDiagram(data, {
+  sourceField: "source",
+  targetField: "target",
+  valueField: "value"
+})
 ```
-[See full example →](examples/research-report.md)
 
-### Policy Brief Template
-- Executive summary with key findings
-- Interactive data visualizations
-- Auto-generated PDF with QR code
-- [View template →](examples/policy-brief.md)
-
-### Conference Paper
-- Proper academic formatting
-- Figure and table numbering
-- Bibliography management
-- [View template →](examples/conference-paper.md)
+### Data Loader Example
+See `src/data/example.csv.js` for a working data loader that processes CSV files at build time.
 
 ## 🛠️ Features
+
+### 🌐 Observable Framework Capabilities
+
+Observable Framework provides powerful features for research computing:
+
+#### Mathematical Notation
+Write equations using TeX notation directly in markdown:
+```markdown
+The quadratic formula: $x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$
+
+Or display equations:
+$$
+\int_{-\infty}^{\infty} e^{-x^2} dx = \sqrt{\pi}
+$$
+```
+
+#### Geospatial Analysis
+- Built-in support for mapping with [Leaflet](https://observablehq.com/framework/lib/leaflet) and [Mapbox GL](https://observablehq.com/framework/lib/mapbox-gl)
+- GeoJSON and TopoJSON data handling
+- Interactive maps with data overlays
+- [Geospatial examples](https://observablehq.com/framework/lib/geo)
+
+#### SQL Queries
+Query data directly with DuckDB:
+```javascript
+const results = await sql`
+  SELECT year, AVG(temperature) as avg_temp
+  FROM climate_data
+  GROUP BY year
+  ORDER BY year
+`;
+```
+[Learn more about SQL in Observable](https://observablehq.com/framework/lib/sql)
+
+#### Real-time Data
+- WebSocket connections for live data
+- Auto-refresh data loaders
+- Reactive updates when data changes
+- [API integration examples](https://observablehq.com/framework/loaders)
+
+#### Scientific Computing
+- [Apache Arrow](https://observablehq.com/framework/lib/arrow) for efficient data processing
+- [Arquero](https://observablehq.com/framework/lib/arquero) for data transformation
+- [Simple Statistics](https://observablehq.com/@observablehq/simple-statistics) for statistical analysis
+- Python integration via data loaders
 
 ### 📊 Visualization Components
 
@@ -161,13 +199,16 @@ Timeline(events, {
 
 ### 📄 PDF Export Pipeline
 
-Our sophisticated PDF generation includes:
+**The PDF export works excellently out-of-the-box!** Our sophisticated PDF generation automatically handles:
 
-- **Smart Page Breaks** - Tables and figures stay together
-- **QR Code Integration** - Links print versions to web
-- **Academic Typography** - Professional formatting
-- **Custom Styling** - Match your institution's guidelines
+- **Professional Typography** - Clean, academic formatting by default
+- **Smart Page Breaks** - Tables and figures stay together automatically
+- **Table Handling** - Multi-page tables with proper headers and formatting
+- **QR Code Integration** - Auto-generated QR codes link print to web versions
+- **Custom Styling** - Easily match your institution's guidelines if needed
 - **Batch Processing** - Export multiple reports at once
+
+PDFs are generated in `pdf-export/output/` and automatically copied to `src/` for easy access.
 
 Configuration in `pdf-export/config/config.json`:
 ```json
@@ -402,6 +443,33 @@ npm run deploy
 - [D3.js Examples](https://observablehq.com/@d3/gallery) - advanced visualizations
 - [Markdown Guide](https://www.markdownguide.org/) - formatting reference
 
+## 🚀 Next Steps & Planned Resources
+
+### Coming Soon
+We're actively developing additional resources to help researchers:
+
+#### 🎬 Video Tutorials (Planned)
+- Getting Started (10 min) - From zero to first visualization
+- Adding Your Research Data (8 min) - CSV, JSON, and API data
+- Creating Publication-Ready PDFs (12 min) - Export and formatting
+
+#### 📝 Template Library (In Development)
+- **Research Report Template** - Full paper with citations and figures
+- **Policy Brief Template** - Executive summary with key visualizations
+- **Conference Paper Template** - Academic formatting with bibliography
+- **Systematic Review Dashboard** - Interactive literature analysis
+- **Lab Notebook Template** - Daily research documentation
+- **Grant Proposal Figures** - Publication-quality visualizations
+
+#### 🔧 Additional Tools
+- GitHub template repository for one-click setup
+- VS Code extension with snippets
+- Citation management integration
+- Cloud deployment guides
+
+### Want to Help?
+We're looking for contributors to help create these resources! See the Contributing section below.
+
 ## 🤝 Contributing
 
 We welcome contributions from the research community!
@@ -411,11 +479,8 @@ We welcome contributions from the research community!
 - **Share Templates** - Created a useful layout? Share it!
 - **Improve Docs** - Help other researchers get started
 - **Add Features** - Extend functionality for your needs
+- **Create Tutorials** - Help with the resources above!
 
-### Community Templates
-- [Systematic Review Dashboard](community/systematic-review)
-- [Lab Notebook Template](community/lab-notebook)
-- [Grant Proposal Figures](community/grant-proposal)
 
 ## 📚 Resources
 
