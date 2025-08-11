@@ -252,14 +252,136 @@ export default {
 - QR code settings
 - Per-document overrides
 
-## 🔬 Advanced Features
+## 📚 Referencing & Citations
 
-### Publishing Pipeline Integration
+### Current Support: Footnotes
 
-- **Ghost CMS Integration** - Manage content separately from code
-- **DOI Minting** - Zenodo integration for citations
-- **Automated Workflows** - GitHub Actions for CI/CD
-- **Multi-format Export** - HTML, PDF, and future EPUB support
+The platform supports footnotes using standard markdown syntax:
+
+```markdown
+This is a statement that needs a reference[^1].
+
+Another claim with a different source[^2].
+
+[^1]: Smith, J. (2024). *Title of Paper*. Journal Name, 45(3), 123-145.
+[^2]: Jones, A. & Brown, B. (2023). *Book Title*. Publisher.
+```
+
+Footnotes are automatically:
+- Numbered sequentially
+- Linked bi-directionally (click to jump between text and note)
+- Styled appropriately in PDF output
+- Placed at the bottom of the page in PDF
+
+### Bibliography Management
+
+Currently, bibliography management is manual. We recommend:
+
+1. **For simple references**: Use footnotes as shown above
+2. **For bibliography section**: Create a markdown list at the end of your document:
+
+```markdown
+## References
+
+- Smith, J. (2024). *Title of Paper*. Journal Name, 45(3), 123-145.
+- Jones, A. & Brown, B. (2023). *Book Title*. Publisher.
+- Williams, C. (2023). "Article Title." *Conference Proceedings*, pp. 78-92.
+```
+
+3. **For consistent formatting**: Use a reference manager (Zotero, Mendeley) to export formatted citations, then paste into your markdown
+
+**Note**: Full academic citation support (BibTeX, CSL) is on our roadmap (see below).
+
+## 🚀 Deployment
+
+### GitHub Pages (Public, Free)
+
+This repository includes a GitHub Actions workflow for automatic deployment:
+
+1. **Enable GitHub Pages** in your repository:
+   - Go to Settings → Pages
+   - Source: "GitHub Actions"
+
+2. **Push to main branch**:
+   ```bash
+   git add .
+   git commit -m "Update research"
+   git push origin main
+   ```
+
+3. **Automatic deployment**:
+   - GitHub Actions builds your site
+   - Deploys to `https://[username].github.io/[repository]/`
+   - Usually takes 2-3 minutes
+
+### Netlify (Free with Password Protection)
+
+For private research or pre-publication drafts:
+
+1. **Build locally**:
+   ```bash
+   npm run build
+   ```
+
+2. **Deploy to Netlify**:
+   
+   **Option A: Drag & Drop**
+   - Go to [netlify.com](https://netlify.com)
+   - Drag your `dist` folder to the deployment area
+   
+   **Option B: Git Integration**
+   - Connect your GitHub repository
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+
+3. **Enable password protection** (free tier):
+   - Site Settings → Access Control → Password Protection
+   - Set a password for your site
+
+4. **Custom domain** (optional):
+   - Domain Settings → Add custom domain
+
+### Vercel (Alternative to Netlify)
+
+Similar to Netlify with good performance:
+
+1. **Install Vercel CLI**:
+   ```bash
+   npm i -g vercel
+   ```
+
+2. **Deploy**:
+   ```bash
+   npm run build
+   vercel dist
+   ```
+
+### Observable Platform
+
+For Observable's hosted solution (requires account):
+```bash
+npm run deploy
+```
+
+## 🗺️ Feature Roadmap
+
+### Near Term (Q1 2025)
+- [ ] Full BibTeX support for academic citations
+- [ ] CSL (Citation Style Language) integration
+- [ ] Enhanced PDF templates for different document types
+- [ ] Docker container for consistent environments
+
+### Medium Term (Q2-Q3 2025)
+- [ ] Ghost CMS integration for content management
+- [ ] DOI minting via Zenodo integration
+- [ ] EPUB export for e-readers
+- [ ] Multi-language support
+
+### Long Term (Q4 2025+)
+- [ ] Real-time collaboration features
+- [ ] Integration with reference managers (Zotero, Mendeley)
+- [ ] Automated literature review tools
+- [ ] LaTeX equation editor with live preview
 
 ### For Research Groups
 
@@ -268,23 +390,17 @@ export default {
 - **Data Pipelines** - Standardize processing
 - **Review Workflows** - Pull request reviews for quality control
 
-## 🆘 Help for Researchers
-
-### Coming from R?
-- Observable Plot is similar to ggplot2 but for the web
-- Data manipulation uses JavaScript instead of dplyr
-- [Migration guide from R →](docs/from-r.md)
-
-### Coming from LaTeX?
-- Markdown is simpler but powerful enough for most needs
-- Math rendering via KaTeX: `$$\alpha + \beta = \gamma$$`
-- Bibliography management via CSL
-- [LaTeX users guide →](docs/from-latex.md)
+## 🆘 Getting Help
 
 ### New to Git?
-- Use GitHub Desktop for visual interface
+- Use [GitHub Desktop](https://desktop.github.com/) for visual interface
 - Basic workflow: Edit → Commit → Push
-- [Git for researchers →](docs/git-basics.md)
+- [Pro Git Book (free)](https://git-scm.com/book) - comprehensive guide
+
+### Learning Resources
+- [Observable Plot Gallery](https://observablehq.com/plot/gallery) - visualization examples
+- [D3.js Examples](https://observablehq.com/@d3/gallery) - advanced visualizations
+- [Markdown Guide](https://www.markdownguide.org/) - formatting reference
 
 ## 🤝 Contributing
 
@@ -308,9 +424,27 @@ We welcome contributions from the research community!
 - [Observable Plot Examples](https://observablehq.com/plot/)
 - [Academic Writing in Markdown](https://pandoc.org/MANUAL.html)
 
-## 📄 License
+## 📄 Licensing
 
-MIT - Use freely in your research!
+### This Project
+MIT License - Use freely in your research, teaching, and publications!
+
+### Open Source Dependencies
+This platform is built on open-source software with permissive licenses:
+
+| Component | License | Usage Rights |
+|-----------|---------|-------------|
+| Observable Framework | ISC | ✅ Free for any use |
+| D3.js | BSD-3-Clause | ✅ Free with attribution |
+| Puppeteer | Apache 2.0 | ✅ Free with patent protection |
+| Other npm packages | Various MIT/ISC | ✅ All permissive |
+
+**What this means for researchers**:
+- ✅ Use freely in academic and commercial projects
+- ✅ Modify and extend for your needs
+- ✅ No licensing fees or restrictions
+- ✅ Include in grant-funded research
+- ✅ Publish and share your modifications
 
 ## 🙏 Acknowledgments
 
