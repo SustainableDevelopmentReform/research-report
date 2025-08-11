@@ -17,6 +17,7 @@ import {
   formatBytes,
   formatDuration
 } from './utils.js';
+import { execSync } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -48,6 +49,15 @@ class PDFConverter {
       const configContent = await readFile(this.configPath, 'utf8');
       this.config = JSON.parse(configContent);
       
+      // Auto-detect GitHub Pages URL if not provided
+      if (this.config.qrCode && this.config.qrCode.enabled && !this.config.qrCode.baseUrl) {
+        const detectedUrl = this.getGitHubPagesUrl();
+        if (detectedUrl) {
+          this.config.qrCode.baseUrl = detectedUrl;
+          this.logger.info(`Auto-detected GitHub Pages URL: ${detectedUrl}`);
+        }
+      }
+      
       // Ensure output directory exists
       await ensureDirectory(this.outputDir);
       
@@ -58,6 +68,48 @@ class PDFConverter {
     } catch (error) {
       this.logger.error(`Failed to initialize: ${error.message}`);
       throw error;
+    }
+  }
+
+  getGitHubPagesUrl() {
+    try {
+      // Get the git remote origin URL
+      const remoteUrl = execSync('git config --get remote.origin.url', { encoding: 'utf8' }).trim();
+      
+      if (!remoteUrl) {
+        this.logger.warn('No git remote origin found');
+        return null;
+      }
+      
+      // Parse GitHub repository information
+      // Supports both HTTPS and SSH URLs
+      let match;
+      if (remoteUrl.startsWith('https://github.com/')) {
+        // HTTPS: https://github.com/username/repository.git
+        match = remoteUrl.match(/https:\/\/github\.com\/([^\/]+)\/([^\/\.]+)/);
+      } else if (remoteUrl.startsWith('git@github.com:')) {
+        // SSH: git@github.com:username/repository.git
+        match = remoteUrl.match(/git@github\.com:([^\/]+)\/([^\/\.]+)/);
+      }
+      
+      if (!match) {
+        this.logger.warn('Could not parse GitHub repository from remote URL');
+        return null;
+      }
+      
+      const [, username, repository] = match;
+      
+      // Check if this is a user/org GitHub Pages site (username.github.io repo)
+      if (repository.toLowerCase() === `${username.toLowerCase()}.github.io`) {
+        return `https://${username.toLowerCase()}.github.io`;
+      }
+      
+      // Standard project GitHub Pages URL
+      return `https://${username.toLowerCase()}.github.io/${repository}`;
+      
+    } catch (error) {
+      this.logger.warn(`Could not auto-detect GitHub Pages URL: ${error.message}`);
+      return null;
     }
   }
 

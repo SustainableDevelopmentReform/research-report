@@ -49,7 +49,7 @@
   },
   "qrCode": {
     "enabled": true,
-    "baseUrl": "https://bmmilligan1.github.io/BBNJ-CHM",
+    "baseUrl": null,
     "width": 65,
     "margin": 1,
     "errorCorrectionLevel": "M",
