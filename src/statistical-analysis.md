@@ -189,13 +189,6 @@ Visualizing the results of statistical tests helps communicate significance[^5].
 const group1 = d3.range(50).map(() => d3.randomNormal(100, 15)());
 const group2 = d3.range(50).map(() => d3.randomNormal(108, 15)());
 
-// Approximate p-value calculation (simplified)
-function jStat_studentt_cdf(t, df) {
-  // Simplified approximation for demonstration
-  return 0.5 + 0.5 * (t / Math.sqrt(t * t + df));
-}
-const jStat = {studentt: {cdf: jStat_studentt_cdf}};
-
 // Calculate t-statistic
 const mean1 = d3.mean(group1);
 const mean2 = d3.mean(group2);
@@ -207,7 +200,13 @@ const n2 = group2.length;
 const pooledSE = Math.sqrt(var1/n1 + var2/n2);
 const tStat = (mean2 - mean1) / pooledSE;
 const df = n1 + n2 - 2;
-const pValue = 2 * (1 - jStat.studentt.cdf(Math.abs(tStat), df)); // Approximation
+
+// Simplified p-value approximation using normal distribution for large df
+// For df > 30, t-distribution approximates normal distribution
+const pValue = Math.abs(tStat) > 3.5 ? 0.0005 : 
+               Math.abs(tStat) > 2.5 ? 0.01 :
+               Math.abs(tStat) > 2.0 ? 0.05 :
+               Math.abs(tStat) > 1.5 ? 0.1 : 0.2;
 
 const testResult = {
   "Group 1 Mean": mean1.toFixed(2),

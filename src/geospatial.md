@@ -74,10 +74,6 @@ Plot.plot({
   subtitle: "Clustered sampling sites across regions",
   width: 800,
   height: 500,
-  projection: {
-    type: "albers-usa",
-    domain: {type: "Sphere"}
-  },
   marks: [
     Plot.dot(mapPoints, {
       x: "lon",

@@ -37,15 +37,73 @@ const links = [
 ];
 ```
 
+```js
+// Create a simple network visualization using Plot
+Plot.plot({
+  title: "Research Collaboration Network Graph",
+  subtitle: "Connections between research institutions",
+  width: 800,
+  height: 600,
+  marginTop: 40,
+  marginBottom: 40,
+  marks: [
+    // Draw links as lines
+    Plot.link(links, {
+      x1: d => {
+        const sourceNode = nodes.find(n => n.id === d.source);
+        const angle = (nodes.indexOf(sourceNode) / nodes.length) * 2 * Math.PI;
+        return 400 + 200 * Math.cos(angle);
+      },
+      y1: d => {
+        const sourceNode = nodes.find(n => n.id === d.source);
+        const angle = (nodes.indexOf(sourceNode) / nodes.length) * 2 * Math.PI;
+        return 300 + 200 * Math.sin(angle);
+      },
+      x2: d => {
+        const targetNode = nodes.find(n => n.id === d.target);
+        const angle = (nodes.indexOf(targetNode) / nodes.length) * 2 * Math.PI;
+        return 400 + 200 * Math.cos(angle);
+      },
+      y2: d => {
+        const targetNode = nodes.find(n => n.id === d.target);
+        const angle = (nodes.indexOf(targetNode) / nodes.length) * 2 * Math.PI;
+        return 300 + 200 * Math.sin(angle);
+      },
+      stroke: "gray",
+      strokeOpacity: 0.5,
+      strokeWidth: d => Math.sqrt(d.value)
+    }),
+    // Draw nodes as dots
+    Plot.dot(nodes, {
+      x: (d, i) => 400 + 200 * Math.cos((i / nodes.length) * 2 * Math.PI),
+      y: (d, i) => 300 + 200 * Math.sin((i / nodes.length) * 2 * Math.PI),
+      r: 8,
+      fill: "group",
+      stroke: "white",
+      strokeWidth: 2,
+      tip: true
+    }),
+    // Add labels
+    Plot.text(nodes, {
+      x: (d, i) => 400 + 240 * Math.cos((i / nodes.length) * 2 * Math.PI),
+      y: (d, i) => 300 + 240 * Math.sin((i / nodes.length) * 2 * Math.PI),
+      text: "id",
+      fontSize: 10,
+      textAnchor: "middle"
+    })
+  ]
+})
+```
+
 ## Sankey Diagram: Research Funding Flow
 
 ```js
-// Prepare data for Sankey diagram
+// Prepare data for Sankey diagram with proper structure
 const sankeyData = {
   nodes: nodes.map(n => ({...n, name: n.id})),
   links: links.map(l => ({
-    source: nodes.findIndex(n => n.id === l.source),
-    target: nodes.findIndex(n => n.id === l.target),
+    source: l.source,
+    target: l.target,
     value: l.value
   }))
 };
@@ -53,7 +111,7 @@ const sankeyData = {
 
 ```js
 SankeyDiagram(sankeyData, {
-  title: "Research Collaboration Network",
+  title: "Research Funding Flow",
   width: 900,
   height: 500,
   nodeWidth: 15,

@@ -35,10 +35,10 @@ const enrichedData = researchData.map(d => ({
 ## Interactive Data Table
 
 ```js
-const viewOption = view(Inputs.select(["Summary", "Full Dataset", "By Group", "By Site"], {
+const viewOption = Inputs.select(["Summary", "Full Dataset", "By Group", "By Site"], {
   value: "Summary",
   label: "View"
-}));
+});
 ```
 
 ```js
